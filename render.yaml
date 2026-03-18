@@ -1,0 +1,36 @@
+# render.yaml — Render deployment configuration
+# Deploy this file to configure both the Next.js app and WS server on Render
+
+services:
+  # WebSocket Server (Node.js)
+  - type: web
+    name: aethersolve-ws
+    env: node
+    buildCommand: npm install ws
+    startCommand: node ws-server.js
+    envVars:
+      - key: WS_PORT
+        value: 8080
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /health
+
+  # (Optional) If deploying Next.js backend on Render instead of Vercel:
+  # - type: web
+  #   name: aethersolve-app
+  #   env: node
+  #   buildCommand: npm install && npm run build
+  #   startCommand: npm start
+  #   envVars:
+  #     - key: DATABASE_URL
+  #       fromDatabase:
+  #         name: aethersolve-db
+  #         property: connectionString
+  #     - key: JWT_SECRET
+  #       generateValue: true
+
+databases:
+  - name: aethersolve-db
+    databaseName: aethersolve
+    user: aethersolve_user
+    plan: free

@@ -1,0 +1,98 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  company   String
+  content   String
+  imageUrl  String?
+  badges    String[] @default([])
+  rating    Int      @default(5)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Announcement {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  link      String?
+  linkText  String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model JobPosting {
+  id           String        @id @default(cuid())
+  title        String
+  department   String
+  location     String
+  type         String        // full-time, part-time, contract
+  isInternship Boolean       @default(false)
+  description  String
+  requirements String[]      @default([])
+  skills       String[]      @default([])
+  isActive     Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  applications Application[]
+}
+
+model Application {
+  id               String      @id @default(cuid())
+  jobId            String
+  job              JobPosting  @relation(fields: [jobId], references: [id])
+  
+  // Personal Info
+  firstName        String
+  lastName         String
+  email            String
+  phone            String
+  
+  // Professional Info
+  currentRole      String?
+  previousCompany  String?
+  skills           String[]    @default([])
+  experienceYears  Int?
+  
+  // Intern-specific
+  isIntern         Boolean     @default(false)
+  collegeName      String?
+  degree           String?
+  yearOfStudy      String?
+  cgpa             String?
+  graduationYear   String?
+  
+  // Documents
+  resumeUrl        String?
+  coverLetter      String?
+  portfolioUrl     String?
+  linkedinUrl      String?
+  
+  // Status
+  status           String      @default("pending") // pending, reviewing, approved, declined
+  adminNotes       String?
+  
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
