@@ -4,12 +4,24 @@ import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
   title: 'AetherSolve Technologies — Building Tomorrow\'s Solutions Today',
-  description: 'AetherSolve Technologies is a premier IT services and product company delivering tailored websites, mobile apps, ERP systems, AI integrations, and managed cloud solutions for businesses across India and beyond.',
+  description: 'AetherSolve Technologies is a premier IT services and product company delivering tailored websites, mobile apps, ERP systems, AI integrations, and managed cloud solutions.',
   keywords: 'web development, mobile app development, ERP, CRM, AI integration, IT services, digital transformation, AetherSolve',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-32x32.png',
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     title: 'AetherSolve Technologies',
-    description: 'Premier IT services & product company. We build, host, and grow your digital infrastructure.',
+    description: 'Premier IT services & product company. We build, host, maintain and grow your digital infrastructure.',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'AetherSolve Technologies' }],
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AetherSolve Technologies',
+    description: 'Premier IT services & product company.',
+    images: ['/og-image.png'],
   },
 };
 
