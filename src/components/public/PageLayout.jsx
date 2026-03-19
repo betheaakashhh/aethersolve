@@ -12,7 +12,7 @@ export default function PageLayout({ children, breadcrumb, title, subtitle, badg
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="relative w-9 h-9 shrink-0">
-              <Image src="/aether.png" alt="AetherSolve" fill sizes="36px" className="object-contain" priority />
+              <Image src="/newaether.png" alt="AetherSolve" fill sizes="36px" className="object-contain" priority />
             </div>
             <div className="flex flex-col leading-none">
               <span className="font-display font-bold text-slate-900 text-base tracking-tight">AetherSolve</span>
