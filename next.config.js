@@ -7,9 +7,8 @@ const nextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
     ],
   },
-  experimental: {
-    serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs'],
-  },
+  // In Next.js 14.1+, this moved out of experimental
+  serverExternalPackages: ['@prisma/client', 'bcryptjs'],
 };
 
 module.exports = nextConfig;
