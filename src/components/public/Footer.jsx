@@ -2,9 +2,29 @@
 import { Zap, Mail, Phone, MapPin, Linkedin, Twitter, Github, ArrowRight } from 'lucide-react';
 
 const links = {
-  Services: ['Web Development', 'Mobile Apps', 'UI/UX Design', 'ERP / CRM', 'AI Integration', 'Cloud Hosting'],
-  Company: ['About Us', 'Our Work', 'Careers', 'Blog', 'Press'],
-  Industries: ['Education', 'Healthcare', 'Finance', 'Manufacturing', 'Real Estate', 'Retail'],
+  Services: [
+    { label: 'Web Development', href: '/services/web-development' },
+    { label: 'Mobile Apps', href: '/services/mobile-apps' },
+    { label: 'UI/UX Design', href: '/services/ui-ux-design' },
+    { label: 'ERP / CRM', href: '/services/erp-crm' },
+    { label: 'AI Integration', href: '/services/ai-integration' },
+    { label: 'Cloud Hosting', href: '/services/cloud-hosting' },
+  ],
+  Company: [
+    { label: 'About Us', href: '/company/about' },
+    { label: 'Our Work', href: '/company/work' },
+    { label: 'Careers', href: '/company/careers' },
+    { label: 'Blog', href: '/company/blog' },
+    { label: 'Press', href: '/company/press' },
+  ],
+  Industries: [
+    { label: 'Education', href: '/industries/education' },
+    { label: 'Healthcare', href: '/industries/healthcare' },
+    { label: 'Finance', href: '/industries/finance' },
+    { label: 'Manufacturing', href: '/industries/manufacturing' },
+    { label: 'Real Estate', href: '/industries/real-estate' },
+    { label: 'Retail', href: '/industries/retail' },
+  ],
 };
 
 export default function Footer() {
@@ -61,7 +81,7 @@ export default function Footer() {
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2 text-slate-400">
                 <Mail size={13} className="text-brand-400" />
-                <a href="mailto:hello@aethersolve.com" className="hover:text-white transition-colors">hello@aethersolve.com</a>
+                <a href="mailto:contact.sincut@gmail.com" className="hover:text-white transition-colors">Mail@aethersolve</a>
               </div>
               <div className="flex items-center gap-2 text-slate-400">
                 <Phone size={13} className="text-brand-400" />
@@ -69,7 +89,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2 text-slate-400">
                 <MapPin size={13} className="text-brand-400" />
-                <span>Bengaluru, Karnataka, India</span>
+                <span>Bhilai, Chhattisgarh, Bharat</span>
               </div>
             </div>
 
@@ -92,9 +112,9 @@ export default function Footer() {
               <h4 className="text-white font-semibold text-sm mb-4">{heading}</h4>
               <ul className="space-y-2.5">
                 {items.map(item => (
-                  <li key={item}>
-                    <a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">
-                      {item}
+                  <li key={item.label}>
+                    <a href={item.href} className="text-sm text-slate-400 hover:text-white transition-colors">
+                      {item.label}
                     </a>
                   </li>
                 ))}
