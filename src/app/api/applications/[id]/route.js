@@ -20,19 +20,27 @@ export async function PATCH(request, { params }) {
   const admin = getAdminFromRequest(request);
   if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const { status, adminNotes, sendEmail } = await request.json();
+  const body = await request.json();
+  const {
+    status, adminNotes, sendEmail,
+    // Admin offer fields
+    joiningDate, workingHours,
+    internStartDate, internEndDate, internWorkHours, stipend,
+  } = body;
 
-  // Fetch full application + job for email
-  const application = await prisma.application.findUnique({
-    where: { id: params.id },
-    include: { job: true },
-  });
-  if (!application) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  // Build update data — only include defined fields
+  const updateData = { status };
+  if (adminNotes  !== undefined) updateData.adminNotes  = adminNotes;
+  if (joiningDate !== undefined) updateData.joiningDate = joiningDate;
+  if (workingHours!== undefined) updateData.workingHours= workingHours;
+  if (internStartDate !== undefined) updateData.internStartDate = internStartDate;
+  if (internEndDate   !== undefined) updateData.internEndDate   = internEndDate;
+  if (internWorkHours !== undefined) updateData.internWorkHours = internWorkHours;
+  if (stipend     !== undefined) updateData.stipend     = stipend;
 
-  // Update status
   const updated = await prisma.application.update({
     where: { id: params.id },
-    data: { status, ...(adminNotes !== undefined && { adminNotes }) },
+    data: updateData,
     include: { job: true },
   });
 
@@ -46,13 +54,12 @@ export async function PATCH(request, { params }) {
           firstName: updated.firstName,
           jobTitle:  updated.job.title,
         });
-        // AUTO-DELETE applicant data after decline email sent
+        // AUTO-DELETE after decline email sent
         await prisma.application.delete({ where: { id: params.id } });
-        return NextResponse.json({ success: true, deleted: true, message: 'Application declined and data removed.' });
+        return NextResponse.json({ success: true, deleted: true, message: 'Declined & data removed.' });
       }
     } catch (emailErr) {
       console.error('[Email Error]', emailErr);
-      // Still return success — email failure shouldn't block status update
       return NextResponse.json({ application: updated, emailError: emailErr.message });
     }
   }

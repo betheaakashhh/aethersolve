@@ -47,7 +47,7 @@ model JobPosting {
   title        String
   department   String
   location     String
-  type         String        // full-time, part-time, contract
+  type         String
   isInternship Boolean       @default(false)
   description  String
   requirements String[]      @default([])
@@ -59,40 +59,49 @@ model JobPosting {
 }
 
 model Application {
-  id               String      @id @default(cuid())
+  id               String     @id @default(cuid())
   jobId            String
-  job              JobPosting  @relation(fields: [jobId], references: [id])
-  
+  job              JobPosting @relation(fields: [jobId], references: [id])
+
   // Personal Info
   firstName        String
   lastName         String
   email            String
   phone            String
-  
+
   // Professional Info
   currentRole      String?
   previousCompany  String?
-  skills           String[]    @default([])
+  skills           String[]   @default([])
   experienceYears  Int?
-  
+
   // Intern-specific
-  isIntern         Boolean     @default(false)
+  isIntern         Boolean    @default(false)
   collegeName      String?
   degree           String?
   yearOfStudy      String?
   cgpa             String?
   graduationYear   String?
-  
+
   // Documents
   resumeUrl        String?
+  driveResumeUrl   String?
   coverLetter      String?
   portfolioUrl     String?
   linkedinUrl      String?
-  
+
   // Status
-  status           String      @default("pending") // pending, reviewing, approved, declined
+  status           String     @default("pending")
   adminNotes       String?
-  
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
+
+  // Admin-assigned offer fields — filled by admin before approving
+  joiningDate      String?
+  workingHours     String?
+  internStartDate  String?
+  internEndDate    String?
+  internWorkHours  String?
+  stipend          String?
+
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
 }
