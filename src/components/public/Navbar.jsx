@@ -38,7 +38,7 @@ export default function Navbar() {
             {/* aether.png from public/ — 36x36 looks clean in a 64px navbar */}
             <div className="relative w-9 h-9 shrink-0">
               <Image
-                src="/aether.png"
+                src="/newaether.png"
                 alt="AetherSolve logo"
                 fill
                 sizes="36px"
