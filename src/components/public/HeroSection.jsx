@@ -66,6 +66,10 @@ export default function HeroSection() {
                 Solutions
                 <span className="text-brand-600"> Today.</span>
               </h1>
+              <h4 className='font-display text-1xl sm:text-4xl lg:text-3xl font-900 text-slate-600 leading-[0.05] tracking-tight'>
+              Think it. AetherSolve it.
+
+              </h4>
             </div>
 
             {/* Subtext */}
