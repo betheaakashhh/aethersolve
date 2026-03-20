@@ -5,6 +5,7 @@ import {
   GraduationCap, Heart, Banknote, Factory,
   Building2, ShoppingBag, Landmark, Wifi, ArrowRight
 } from 'lucide-react';
+import Link from 'next/link';
 
 const industries = [
   {
@@ -15,6 +16,7 @@ const industries = [
     clients: ['Schools & Universities', 'EdTech Startups', 'Coaching Institutes', 'Corporate Training'],
     color: '#006ec7',
     bg: '#f0f7ff',
+    href: '/industries/education',
   },
   {
     icon: Heart,
@@ -24,6 +26,7 @@ const industries = [
     clients: ['Hospitals & Clinics', 'Health Insurance', 'Telemedicine', 'MedTech Startups'],
     color: '#dc2626',
     bg: '#fff1f2',
+    href: '/industries/healthcare',
   },
   {
     icon: Banknote,
@@ -33,6 +36,7 @@ const industries = [
     clients: ['Fintechs', 'NBFCs & Lending', 'Insurance Tech', 'Wealth Platforms'],
     color: '#059669',
     bg: '#f0fdf4',
+    href: '/industries/finance',
   },
   {
     icon: Factory,
@@ -42,6 +46,7 @@ const industries = [
     clients: ['Manufacturers', 'Logistics Companies', 'Supply Chain', 'Fleet Operators'],
     color: '#d97706',
     bg: '#fffbeb',
+    href: '/industries/manufacturing',
   },
   {
     icon: Building2,
@@ -51,6 +56,7 @@ const industries = [
     clients: ['Developers', 'Broker Networks', 'Property Portals', 'REIT Platforms'],
     color: '#7c3aed',
     bg: '#f5f3ff',
+    href: '/industries/real-estate',
   },
   {
     icon: ShoppingBag,
@@ -60,6 +66,7 @@ const industries = [
     clients: ['D2C Brands', 'Retail Chains', 'Marketplace Sellers', 'FMCG Companies'],
     color: '#0891b2',
     bg: '#ecfeff',
+    href: '/industries/retail',
   },
   {
     icon: Landmark,
@@ -69,6 +76,7 @@ const industries = [
     clients: ['State Governments', 'Smart City Projects', 'Public Utilities', 'Defence (DPIIT)'],
     color: '#1d4ed8',
     bg: '#eff6ff',
+    href: '/#contact',
   },
   {
     icon: Wifi,
@@ -78,6 +86,7 @@ const industries = [
     clients: ['Smart Factories', 'Building Automation', 'Connected Retail', 'AgriTech'],
     color: '#0d9488',
     bg: '#f0fdfa',
+    href: '/#contact',
   },
 ];
 
@@ -102,8 +111,8 @@ export default function IndustriesSection() {
         <div className="grid lg:grid-cols-5 gap-6">
           {/* Industry list */}
           <div className="lg:col-span-2 flex flex-col gap-1">
-            {industries.map((ind, i) => {
-              const Icon = ind.icon;
+            {industries.map((item, i) => {
+              const Icon = item.icon;
               return (
                 <button
                   key={i}
@@ -116,13 +125,13 @@ export default function IndustriesSection() {
                 >
                   <div
                     className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-colors"
-                    style={{ background: active === i ? ind.bg : '#f8fafc', color: active === i ? ind.color : '#94a3b8' }}
+                    style={{ background: active === i ? item.bg : '#f8fafc', color: active === i ? item.color : '#94a3b8' }}
                   >
                     <Icon size={17} />
                   </div>
                   <div>
-                    <div className={`text-sm font-semibold ${active === i ? 'text-slate-900' : 'text-slate-600'}`}>{ind.name}</div>
-                    <div className="text-xs text-slate-400">{ind.tagline}</div>
+                    <div className={`text-sm font-semibold ${active === i ? 'text-slate-900' : 'text-slate-600'}`}>{item.name}</div>
+                    <div className="text-xs text-slate-400">{item.tagline}</div>
                   </div>
                   {active === i && <ArrowRight size={14} className="ml-auto text-brand-500" />}
                 </button>
@@ -166,12 +175,14 @@ export default function IndustriesSection() {
               </div>
             </div>
 
-            <button
-              className="mt-6 flex items-center gap-2 text-sm font-semibold"
+            {/* Linked "See full page" button */}
+            <Link
+              href={ind.href}
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold transition-all hover:gap-3"
               style={{ color: ind.color }}
             >
-              See case studies <ArrowRight size={14} />
-            </button>
+              Explore {ind.name} Solutions <ArrowRight size={14} />
+            </Link>
           </div>
         </div>
       </div>
