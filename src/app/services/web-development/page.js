@@ -10,3 +10,5 @@ export const metadata = {
 export default function WebDevelopmentPage() {
   return <WebDevelopmentClient />;
 }
+
+

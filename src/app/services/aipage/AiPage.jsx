@@ -42,7 +42,7 @@ function ParticleField() {
         this.vy = (Math.random() - 0.5) * 0.4;
         this.r = Math.random() * 1.5 + 0.3;
         this.alpha = Math.random() * 0.5 + 0.1;
-        this.color = Math.random() > 0.6 ? '#00e5ff' : Math.random() > 0.5 ? '#006ec7' : '#7c3aed';
+        this.color = Math.random() > 0.6 ? '#f59e0b' : Math.random() > 0.5 ? '#006ec7' : '#0a4f96';
       }
       update() {
         this.x += this.vx; this.y += this.vy;
@@ -74,7 +74,7 @@ function ParticleField() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0,229,255,${0.06 * (1 - dist / 100)})`;
+            ctx.strokeStyle = `rgba(0,110,199,${0.08 * (1 - dist / 100)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -120,11 +120,11 @@ function TerminalLine({ lines, delay = 0 }) {
     <div className="font-mono text-xs sm:text-sm leading-6">
       {lines.map((line, i) => (
         <div key={i} className={`transition-opacity duration-500 ${visible.includes(i) ? 'opacity-100' : 'opacity-0'}`}>
-          <span className="text-cyan-400">❯ </span>
-          <span className="text-green-300">{line}</span>
+          <span className="text-amber-400">❯ </span>
+          <span className="text-white/80">{line}</span>
         </div>
       ))}
-      <span className={`inline-block w-2 h-4 bg-cyan-400 ml-4 align-middle transition-opacity ${cursor ? 'opacity-100' : 'opacity-0'}`} />
+      <span className={`inline-block w-2 h-4 bg-brand-600 ml-4 align-middle transition-opacity ${cursor ? 'opacity-100' : 'opacity-0'}`} style={{ background: '#006ec7' }} />
     </div>
   );
 }
@@ -285,7 +285,7 @@ export default function AiPage() {
         'Auto-generated weekly PDF reports',
         'Integrates with your existing ERP/CRM/sheets',
       ],
-      color: 'linear-gradient(135deg, #006ec7, #00e5ff)',
+      color: 'linear-gradient(135deg, #006ec7, #0a4f96)',
     },
     {
       icon: Bot,
@@ -297,7 +297,7 @@ export default function AiPage() {
         'Slack/Teams/web chat integration',
         'Role-based access & audit logs',
       ],
-      color: 'linear-gradient(135deg, #7c3aed, #c026d3)',
+      color: 'linear-gradient(135deg, #f59e0b, #d97706)',
     },
     {
       icon: Workflow,
@@ -309,7 +309,7 @@ export default function AiPage() {
         'Email, WhatsApp, ERP trigger support',
         'Full audit trail & rollback capability',
       ],
-      color: 'linear-gradient(135deg, #059669, #10b981)',
+      color: 'linear-gradient(135deg, #006ec7, #0284c7)',
     },
     {
       icon: FileText,
@@ -321,7 +321,7 @@ export default function AiPage() {
         'Invoice reconciliation automation',
         'Searchable archive with semantic search',
       ],
-      color: 'linear-gradient(135deg, #d97706, #f59e0b)',
+      color: 'linear-gradient(135deg, #f59e0b, #fbbf24)',
     },
     {
       icon: TrendingUp,
@@ -333,7 +333,7 @@ export default function AiPage() {
         'Revenue pipeline prediction',
         'Explainable AI — never a black box',
       ],
-      color: 'linear-gradient(135deg, #dc2626, #f87171)',
+      color: 'linear-gradient(135deg, #006ec7, #1d4ed8)',
     },
     {
       icon: MessageSquare,
@@ -345,7 +345,7 @@ export default function AiPage() {
         'Automated escalation routing',
         'Voice of customer trend reports',
       ],
-      color: 'linear-gradient(135deg, #0891b2, #06b6d4)',
+      color: 'linear-gradient(135deg, #f59e0b, #ea580c)',
     },
   ];
 
@@ -356,9 +356,8 @@ export default function AiPage() {
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
         :root {
-          --cyan: #00e5ff;
-          --blue: #006ec7;
-          --purple: #7c3aed;
+          --brand: #006ec7;
+          --amber: #f59e0b;
           --dark: #04080f;
           --dark2: #080d14;
           --dark3: #0d1520;
@@ -398,14 +397,14 @@ export default function AiPage() {
         }
 
         .gradient-text {
-          background: linear-gradient(135deg, #fff 0%, #00e5ff 50%, #006ec7 100%);
+          background: linear-gradient(135deg, #fff 0%, #f59e0b 50%, #006ec7 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
 
-        .glow-blue { box-shadow: 0 0 30px rgba(0,110,199,0.4), 0 0 60px rgba(0,110,199,0.15); }
-        .glow-cyan { box-shadow: 0 0 30px rgba(0,229,255,0.3), 0 0 60px rgba(0,229,255,0.1); }
+        .glow-blue { box-shadow: 0 0 30px rgba(0,110,199,0.5), 0 0 60px rgba(0,110,199,0.2); }
+        .glow-amber { box-shadow: 0 0 30px rgba(245,158,11,0.4), 0 0 60px rgba(245,158,11,0.1); }
 
         .btn-ai {
           position: relative;
@@ -427,36 +426,36 @@ export default function AiPage() {
         }
 
         .btn-ai-primary {
-          background: linear-gradient(135deg, #006ec7, #00e5ff);
-          color: #000;
-          box-shadow: 0 0 20px rgba(0,229,255,0.3);
+          background: linear-gradient(135deg, #006ec7, #0a4f96);
+          color: #fff;
+          box-shadow: 0 0 20px rgba(0,110,199,0.35);
         }
         .btn-ai-primary:hover {
-          box-shadow: 0 0 40px rgba(0,229,255,0.5);
+          box-shadow: 0 0 40px rgba(0,110,199,0.55);
           transform: translateY(-2px);
         }
 
         .btn-ai-ghost {
           background: transparent;
-          color: #00e5ff;
-          border: 1px solid rgba(0,229,255,0.3);
+          color: #f59e0b;
+          border: 1px solid rgba(245,158,11,0.35);
         }
         .btn-ai-ghost:hover {
-          background: rgba(0,229,255,0.05);
-          border-color: rgba(0,229,255,0.6);
-          box-shadow: 0 0 20px rgba(0,229,255,0.15);
+          background: rgba(245,158,11,0.06);
+          border-color: rgba(245,158,11,0.65);
+          box-shadow: 0 0 20px rgba(245,158,11,0.15);
           transform: translateY(-2px);
         }
 
         .grid-bg {
           background-image:
-            linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+            linear-gradient(rgba(0,110,199,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,110,199,0.04) 1px, transparent 1px);
           background-size: 50px 50px;
         }
 
         .hex-pattern {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zM28 100L0 84V50l28-16 28 16v34L28 100z' fill='none' stroke='rgba(0,229,255,0.04)' stroke-width='1'/%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zM28 100L0 84V50l28-16 28 16v34L28 100z' fill='none' stroke='rgba(0,110,199,0.05)' stroke-width='1'/%3E%3C/svg%3E");
         }
 
         @keyframes float {
@@ -489,9 +488,9 @@ export default function AiPage() {
           white-space: nowrap;
         }
         .tab-btn.active {
-          background: rgba(0,229,255,0.1);
-          border-color: rgba(0,229,255,0.3);
-          color: #00e5ff;
+          background: rgba(0,110,199,0.12);
+          border-color: rgba(0,110,199,0.4);
+          color: #006ec7;
         }
         .tab-btn:not(.active) {
           color: #64748b;
@@ -513,7 +512,7 @@ export default function AiPage() {
         <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#04080f]/90 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="relative w-9 h-9 shrink-0">
+              <div className="relative w-9 h-9 shrink-0">
             <Image
                 src="/aetherai.png"
                 alt="AetherSolve logo"
@@ -524,10 +523,9 @@ export default function AiPage() {
             />
 
             </div>
-             
               <div>
-                <span className="font-black text-white text-sm tracking-tight" style={{ fontFamily: "'Consolas', sans-serif" }}>
-                  Aether<span className="text-orange-400">.ai</span>
+                <span className="font-black text-white text-sm tracking-tight" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+                  Aether<span style={{ color: '#f59e0b' }}>AI</span>
                 </span>
                 <div className="text-[9px] text-slate-500 tracking-widest uppercase leading-none">by AetherSolve</div>
               </div>
@@ -536,7 +534,7 @@ export default function AiPage() {
             <div className="hidden md:flex items-center gap-1">
               {['Products', 'Industries', 'ROI', 'Retainer'].map((item, i) => (
                 <a key={i} href={`#${item.toLowerCase()}`}
-                  className="text-xs text-slate-400 hover:text-cyan-400 transition-colors px-4 py-2 rounded-lg hover:bg-white/5 font-medium">
+                  className="text-xs text-slate-400 hover:text-amber-400 transition-colors px-4 py-2 rounded-lg hover:bg-white/5 font-medium">
                   {item}
                 </a>
               ))}
@@ -562,9 +560,9 @@ export default function AiPage() {
           <ParticleField />
 
           {/* Ambient glows */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-400/8 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(0,110,199,0.12)' }} />
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(245,158,11,0.06)' }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(0,110,199,0.05)' }} />
 
           <motion.div
             style={{ opacity: heroOpacity, y: heroY }}
@@ -575,10 +573,10 @@ export default function AiPage() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-600/25 bg-blue-600/8 mb-8"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-              <span className="text-xs text-cyan-400 font-mono tracking-widest">AI SYSTEMS ONLINE — AETHERSOLVE INTELLIGENCE DIVISION</span>
+              <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#006ec7' }} />
+              <span className="text-xs font-mono tracking-widest" style={{ color: '#006ec7' }}>AI SYSTEMS ONLINE — AETHERSOLVE INTELLIGENCE DIVISION</span>
             </motion.div>
 
             {/* Main headline */}
@@ -612,7 +610,7 @@ export default function AiPage() {
               transition={{ delay: 0.8 }}
               className="text-slate-500 text-sm mb-10 font-mono"
             >
-              Not generic SaaS. Not off-the-shelf. <span className="text-cyan-400">Yours.</span>
+              Not generic SaaS. Not off-the-shelf. <span style={{ color: '#f59e0b' }}>Yours.</span>
             </motion.p>
 
             {/* CTA row */}
@@ -641,7 +639,7 @@ export default function AiPage() {
               transition={{ duration: 1, delay: 1 }}
               className="relative max-w-xl mx-auto"
             >
-              <div className="absolute inset-0 rounded-2xl blur-xl bg-cyan-400/10 pointer-events-none" />
+              <div className="absolute inset-0 rounded-2xl blur-xl pointer-events-none" style={{ background: 'rgba(0,110,199,0.12)' }} />
               <div className="relative rounded-2xl border border-white/10 bg-[#0a0f1a]/90 backdrop-blur-sm overflow-hidden">
                 {/* Terminal header */}
                 <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5">
@@ -683,10 +681,10 @@ export default function AiPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { value: '40–50%', label: 'Ops Cost Reduction', icon: TrendingUp, color: '#00e5ff' },
+                { value: '40–50%', label: 'Ops Cost Reduction', icon: TrendingUp, color: '#f59e0b' },
                 { value: '78%', label: 'Orgs using AI in 2026', icon: Activity, color: '#006ec7' },
-                { value: '<18%', label: 'Measure true ROI*', icon: BarChart3, color: '#7c3aed' },
-                { value: '150+', label: 'Projects Delivered', icon: Shield, color: '#10b981' },
+                { value: '<18%', label: 'Measure true ROI*', icon: BarChart3, color: '#f59e0b' },
+                { value: '150+', label: 'Projects Delivered', icon: Shield, color: '#006ec7' },
               ].map((s, i) => (
                 <StatCard key={i} {...s} />
               ))}
@@ -707,12 +705,12 @@ export default function AiPage() {
               transition={{ duration: 0.8 }}
               className="text-center mb-16"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-4">
-                <Terminal size={12} className="text-purple-400" />
-                <span className="text-xs text-purple-400 font-mono tracking-widest">THE INTELLIGENCE GAP</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20 mb-4">
+                <Terminal size={12} className="text-amber-400" />
+                <span className="text-xs text-amber-400 font-mono tracking-widest">THE INTELLIGENCE GAP</span>
               </div>
               <h2 className="text-4xl sm:text-5xl font-black text-white mb-4" style={{ fontFamily: "'Orbitron', sans-serif" }}>
-                They Know. <span className="text-cyan-400">You Build.</span>
+                They Know. <span style={{ color: '#006ec7' }}>You Build.</span>
               </h2>
               <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
                 78% of organisations use AI — but most use generic off-the-shelf tools
@@ -727,13 +725,13 @@ export default function AiPage() {
                 {
                   label: 'Generic SaaS AI',
                   icon: '✕',
-                  color: '#ef4444',
+                  color: '#ffffff40',
                   items: ['One-size-fits-all logic', 'Your data leaves your servers', 'Per-seat pricing forever', 'No institutional knowledge', 'No customisation'],
                 },
                 {
                   label: 'AetherSolve AI',
                   icon: '✓',
-                  color: '#00e5ff',
+                  color: '#006ec7',
                   items: ['Trained on your exact data', 'Runs on your infrastructure', 'One-time build + retainer', 'Knows your business rules', 'Fully extensible'],
                   highlight: true,
                 },
@@ -751,11 +749,11 @@ export default function AiPage() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.15, duration: 0.6 }}
                   className={`relative rounded-2xl border p-6 ${col.highlight
-                    ? 'border-cyan-400/30 bg-cyan-400/5'
+                    ? 'border-blue-600/40 bg-blue-600/5'
                     : 'border-white/8 bg-white/[0.02]'}`}
                 >
                   {col.highlight && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-cyan-400 text-black text-xs font-black tracking-wide">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-white text-xs font-black tracking-wide" style={{ background: '#006ec7' }}>
                       RECOMMENDED
                     </div>
                   )}
@@ -795,9 +793,9 @@ export default function AiPage() {
               transition={{ duration: 0.8 }}
               className="text-center mb-16"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-4">
-                <Cpu size={12} className="text-blue-400" />
-                <span className="text-xs text-blue-400 font-mono tracking-widest">AI PRODUCT CATALOGUE</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-600/20 mb-4">
+                <Cpu size={12} style={{ color: '#006ec7' }} />
+                <span className="text-xs font-mono tracking-widest" style={{ color: '#006ec7' }}>AI PRODUCT CATALOGUE</span>
               </div>
               <h2 className="text-4xl sm:text-5xl font-black text-white mb-4" style={{ fontFamily: "'Orbitron', sans-serif" }}>
                 What We <span className="gradient-text">Actually Build</span>
@@ -817,7 +815,7 @@ export default function AiPage() {
 
         {/* ── ROI CALCULATOR SECTION ── */}
         <section id="roi" className="py-24 relative overflow-hidden">
-          <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-cyan-400/3 to-transparent pointer-events-none" />
+          <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-blue-600/4 to-transparent pointer-events-none" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -828,23 +826,23 @@ export default function AiPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 mb-6">
-                  <DollarSign size={12} className="text-green-400" />
-                  <span className="text-xs text-green-400 font-mono tracking-widest">THE BUSINESS CASE</span>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-600/20 mb-6">
+                  <DollarSign size={12} style={{ color: '#006ec7' }} />
+                  <span className="text-xs font-mono tracking-widest" style={{ color: '#006ec7' }}>THE BUSINESS CASE</span>
                 </div>
                 <h2 className="text-4xl font-black text-white mb-6" style={{ fontFamily: "'Orbitron', sans-serif" }}>
-                  The Pitch That<br /><span className="text-green-400">Closes Itself</span>
+                  The Pitch That<br /><span style={{ color: '#f59e0b' }}>Closes Itself</span>
                 </h2>
                 <div className="rounded-2xl border border-white/10 bg-[#080d14] p-6 mb-6 relative overflow-hidden">
-                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-400/50 to-transparent" />
+                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-600/50 to-transparent" />
                   <p className="text-slate-300 text-sm leading-8 font-mono">
                     <span className="text-slate-500">// real conversation</span><br />
-                    "Your team spends <span className="text-cyan-400 font-bold">8 hours/week</span> pulling Monday reports.<br />
-                    That's <span className="text-cyan-400 font-bold">400 hours/year</span> — roughly{' '}
-                    <span className="text-red-400 font-bold">₹6L in wasted time</span> annually.<br /><br />
+                    "Your team spends <span style={{ color: '#006ec7' }} className="font-bold">8 hours/week</span> pulling Monday reports.<br />
+                    That's <span style={{ color: '#006ec7' }} className="font-bold">400 hours/year</span> — roughly{' '}
+                    <span style={{ color: '#f59e0b' }} className="font-bold">₹6L in wasted time</span> annually.<br /><br />
                     We build a system that does it in{' '}
-                    <span className="text-green-400 font-bold">2 minutes</span>, every Sunday night, automatically.<br /><br />
-                    Project cost: <span className="text-yellow-400 font-bold">₹2L</span>."
+                    <span style={{ color: '#f59e0b' }} className="font-bold">2 minutes</span>, every Sunday night, automatically.<br /><br />
+                    Project cost: <span style={{ color: '#006ec7' }} className="font-bold">₹2L</span>."
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
@@ -863,11 +861,11 @@ export default function AiPage() {
                 className="space-y-4"
               >
                 {[
-                  { label: 'Ops cost reduction', value: '40–50%', bar: 45, color: '#00e5ff' },
-                  { label: 'Decision cycle speed', value: 'Weeks → Minutes', bar: 90, color: '#006ec7' },
-                  { label: 'Report generation time', value: '−95%', bar: 95, color: '#7c3aed' },
-                  { label: 'Client retention after AI', value: '98%', bar: 98, color: '#10b981' },
-                  { label: 'Avg annual time saved', value: '400+ hrs', bar: 75, color: '#f59e0b' },
+                  { label: 'Ops cost reduction', value: '40–50%', bar: 45, color: '#006ec7' },
+                  { label: 'Decision cycle speed', value: 'Weeks → Minutes', bar: 90, color: '#f59e0b' },
+                  { label: 'Report generation time', value: '−95%', bar: 95, color: '#006ec7' },
+                  { label: 'Client retention after AI', value: '98%', bar: 98, color: '#f59e0b' },
+                  { label: 'Avg annual time saved', value: '400+ hrs', bar: 75, color: '#006ec7' },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -910,26 +908,26 @@ export default function AiPage() {
               className="relative rounded-3xl border border-white/10 overflow-hidden"
             >
               {/* Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-[#04080f] to-purple-900/20" />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-[#04080f] to-amber-900/10" />
               <div className="absolute inset-0 grid-bg opacity-30" />
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-600/40 to-transparent" />
 
               <div className="relative z-10 p-10 lg:p-16">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6">
-                      <Clock size={12} className="text-purple-400" />
-                      <span className="text-xs text-purple-400 font-mono tracking-widest">RECURRING REVENUE ENGINE</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20 mb-6">
+                      <Clock size={12} className="text-amber-400" />
+                      <span className="text-xs text-amber-400 font-mono tracking-widest">RECURRING REVENUE ENGINE</span>
                     </div>
                     <h2 className="text-4xl font-black text-white mb-4" style={{ fontFamily: "'Orbitron', sans-serif" }}>
-                      The Retainer<br /><span className="text-purple-400">Model</span>
+                      The Retainer<br /><span style={{ color: '#f59e0b' }}>Model</span>
                     </h2>
                     <p className="text-slate-400 leading-relaxed mb-6">
                       AI systems need ongoing care — LLM API updates, evolving data schemas, new automations.
                       After the initial build, we offer a retainer that keeps your system current and growing.
                     </p>
-                    <div className="rounded-2xl border border-purple-400/20 bg-purple-400/5 p-5">
-                      <div className="text-3xl font-black text-purple-400 mb-1" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+                    <div className="rounded-2xl border border-amber-400/20 bg-amber-400/5 p-5">
+                      <div className="text-3xl font-black mb-1" style={{ color: '#f59e0b', fontFamily: "'Orbitron', sans-serif" }}>
                         ₹25K–60K<span className="text-lg text-slate-400 font-normal">/mo</span>
                       </div>
                       <div className="text-slate-400 text-sm">per retainer client — monitoring, updates + 1 new feature/month</div>
@@ -972,12 +970,12 @@ export default function AiPage() {
               viewport={{ once: true }}
               className="text-center mb-14"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-4">
-                <Building2 size={12} className="text-yellow-400" />
-                <span className="text-xs text-yellow-400 font-mono tracking-widest">TARGET INDUSTRIES</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20 mb-4">
+                <Building2 size={12} className="text-amber-400" />
+                <span className="text-xs text-amber-400 font-mono tracking-widest">TARGET INDUSTRIES</span>
               </div>
               <h2 className="text-4xl font-black text-white" style={{ fontFamily: "'Orbitron', sans-serif" }}>
-                Who We Target <span className="text-yellow-400">First</span>
+                Who We Target <span style={{ color: '#f59e0b' }}>First</span>
               </h2>
               <p className="text-slate-400 mt-3 max-w-xl mx-auto text-sm">
                 Mid-size businesses (20–200 staff) where the decision-maker feels the operational pain directly.
@@ -993,12 +991,12 @@ export default function AiPage() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08, duration: 0.5 }}
                   className="group relative rounded-2xl border border-white/8 bg-[#080d14] p-5
-                    hover:border-yellow-400/20 transition-colors duration-300 overflow-hidden"
+                    hover:border-blue-600/25 transition-colors duration-300 overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/0 to-yellow-400/0 group-hover:from-yellow-400/3 group-hover:to-transparent transition-all duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/0 to-blue-600/0 group-hover:from-blue-600/4 group-hover:to-transparent transition-all duration-500" />
                   <div className="relative z-10 flex items-start gap-4">
-                    <div className="p-2.5 rounded-xl bg-yellow-400/10 group-hover:bg-yellow-400/15 transition-colors flex-shrink-0">
-                      <Icon size={18} className="text-yellow-400" />
+                    <div className="p-2.5 rounded-xl bg-amber-400/10 group-hover:bg-amber-400/15 transition-colors flex-shrink-0">
+                      <Icon size={18} className="text-amber-400" />
                     </div>
                     <div>
                       <div className="text-white text-sm font-bold mb-1">{label}</div>
@@ -1023,7 +1021,7 @@ export default function AiPage() {
                 'Your Data. Your Servers.', '40–50% Cost Reduction', 'Bhilai → India-wide', '150+ Projects Delivered', 'Retainer from ₹25K/mo']
                 .map((item, i) => (
                   <span key={`${k}-${i}`} className="text-xs font-mono tracking-widest text-slate-500 flex items-center gap-3">
-                    <span className="text-cyan-400">◆</span> {item}
+                    <span style={{ color: '#f59e0b' }}>◆</span> {item}
                   </span>
                 ))
             )}
@@ -1038,10 +1036,11 @@ export default function AiPage() {
 
           {/* Pulse rings */}
           {[1, 2, 3].map(i => (
-            <div key={i} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-400/10"
+            <div key={i} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
               style={{
                 width: `${200 + i * 150}px`,
                 height: `${200 + i * 150}px`,
+                border: `1px solid rgba(0,110,199,0.12)`,
                 animation: `pulse-ring ${2 + i * 0.5}s ease-out infinite ${i * 0.5}s`,
               }}
             />
@@ -1056,16 +1055,9 @@ export default function AiPage() {
             >
               {/* Central AI icon */}
               <div className="float-anim inline-flex mb-8">
-                 <div className="relative w-12 h-12 shrink-0">
-                              <Image
-                                src="/aetherai.png"
-                                alt="AetherSolve logo"
-                                fill
-                                sizes="36px"
-                                className="object-contain"
-                                priority
-                              />
-                            </div>
+                <div className="w-20 h-20 rounded-2xl flex items-center justify-center glow-blue" style={{ background: 'linear-gradient(135deg, #006ec7, #0a4f96)' }}>
+                  <Brain size={36} className="text-white" />
+                </div>
               </div>
 
               <h2 className="text-5xl sm:text-6xl font-black text-white mb-6" style={{ fontFamily: "'Orbitron', sans-serif" }}>
@@ -1099,7 +1091,7 @@ export default function AiPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-slate-600 font-mono">
             <span>© {new Date().getFullYear()} AetherSolve Technologies Pvt. Ltd.</span>
             <span className="hidden sm:block text-slate-700">·</span>
-            <Link href="/" className="text-cyan-400/50 hover:text-cyan-400 transition-colors">← Back to Main Site</Link>
+            <Link href="/" className="hover:text-amber-400 transition-colors" style={{ color: 'rgba(245,158,11,0.5)' }}>← Back to Main Site</Link>
             <span className="hidden sm:block text-slate-700">·</span>
             <span>AI Division — Internal Tools & Automation</span>
           </div>
