@@ -12,6 +12,7 @@ const navLinks = [
   { label: 'Work',          href: '/company/work' },
   { label: 'Testimonials',  href: '#testimonials' },
   { label: 'Careers',       href: '#careers' },
+ 
 ];
 
 export default function Navbar() {
@@ -71,6 +72,19 @@ export default function Navbar() {
 
           {/* ── CTA ── */}
           <div className="hidden md:flex items-center gap-3">
+            <Link href="/services/aipage">
+           <button className="relative inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest overflow-hidden text-black transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
+          style={{
+          background: 'linear-gradient(135deg, #006ec7, #00e5ff)',
+          boxShadow: '0 0 0 rgba(0,229,255,0)',
+          fontFamily: 'inherit',
+           }}
+          onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 20px rgba(0,200,232,0.45)'}
+          onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 0 rgba(0,229,255,0)'}
+           >
+          Explore AI Solutions
+          </button>
+          </Link>
             <a
               href="#contact"
               className="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors"
