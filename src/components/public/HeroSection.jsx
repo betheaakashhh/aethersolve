@@ -3,12 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { ArrowRight, Play, Star, Users, Code, Award } from 'lucide-react';
 
-const stats = [
-  { value: '150+', label: 'Projects Delivered', icon: Code },
-  { value: '98%', label: 'Client Retention', icon: Star },
-  { value: '12+', label: 'Industries Served', icon: Award },
-  { value: '50+', label: 'Team Members', icon: Users },
-];
+
 
 export default function HeroSection() {
   const gradientRef = useRef(null);
@@ -104,14 +99,9 @@ export default function HeroSection() {
                     </div>
                   ))}
                 </div>
-                <span className="font-medium text-slate-600">150+ Happy clients</span>
+              
               </div>
-              <div className="flex items-center gap-1.5">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
-                ))}
-                <span className="text-sm font-medium text-slate-600 ml-1">4.9/5 Rating</span>
-              </div>
+             
             </div>
           </div>
 
@@ -147,7 +137,8 @@ export default function HeroSection() {
                   {[
                     { label: 'Uptime', value: '99.97%', color: 'text-teal-600' },
                     { label: 'Response', value: '< 120ms', color: 'text-brand-600' },
-                    { label: 'Clients', value: '150+', color: 'text-amber-600' },
+                    { label: 'Health', value: 'Active', color: 'text-brand-300' },
+
                   ].map(item => (
                     <div key={item.label} className="bg-slate-50 rounded-xl p-3 text-center">
                       <div className={`text-lg font-bold font-display ${item.color}`}>{item.value}</div>
@@ -185,21 +176,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Stats strip */}
-        <div className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 animate-fade-up" style={{ animationDelay: '0.4s' }}>
-          {stats.map(({ value, label, icon: Icon }) => (
-            <div key={label} className="bg-white rounded-2xl border border-slate-100 p-5 flex items-center gap-4 shadow-sm hover:shadow-md transition-shadow group">
-              <div className="w-10 h-10 bg-brand-50 group-hover:bg-brand-100 rounded-xl flex items-center justify-center transition-colors shrink-0">
-                <Icon size={18} className="text-brand-600" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold font-display text-slate-900">{value}</div>
-                <div className="text-xs text-slate-500 font-medium">{label}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+       </div>
     </section>
   );
 }
