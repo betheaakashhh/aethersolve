@@ -12,6 +12,7 @@ const navLinks = [
   { label: 'Work',          href: '/company/work' },
   { label: 'Testimonials',  href: '#testimonials' },
   { label: 'Careers',       href: '#careers' },
+  {label: 'Blog',           href: "/company/blog" },
  
 ];
 
@@ -90,6 +91,7 @@ export default function Navbar() {
                       </div>
                       aether.ai
           </button>
+          
           </Link>
             <a
               href="#contact"
@@ -145,7 +147,30 @@ export default function Navbar() {
               >
                 Join Us
               </a>
+
+               <Link href="/services/aipage">
+           <button className="relative inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold tracking-widest overflow-hidden text-black transition-all duration-200"
+         
+         
+           >
+          <div className="relative w-9 h-9 shrink-0">
+                      <Image
+                          src="/aetherbgrem.png"
+                          alt="AetherSolve logo"
+                          fill
+                          sizes="36px"
+                          className="object-contain"
+                          priority
+                          
+                      />
+                      </div>
+                      aether.ai
+          </button>
+          
+          </Link>
             </div>
+            
+             
           </div>
         </div>
       )}

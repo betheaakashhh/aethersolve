@@ -54,7 +54,7 @@ export default function BlogClient() {
   return (
     <PageLayout
       breadcrumb={[{ label: 'Company' }, { label: 'Blog' }]}
-      badge="✍️ Blog"
+      badge="Blog"
       title="Insights From the Engineers Building the Future"
       subtitle="Engineering decisions, AI experiments, product lessons, and observations from building software for businesses across India."
       heroColor="#006ec7"

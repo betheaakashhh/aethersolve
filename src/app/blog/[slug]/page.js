@@ -36,7 +36,7 @@ export default async function BlogPostPage({ params }) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="relative w-8 h-8 shrink-0">
-              <img src="/aether.png" alt="AetherSolve" className="w-8 h-8 object-contain" />
+              <img src="/newaether.png" alt="AetherSolve" className="w-8 h-8 object-contain" />
             </div>
             <span className="font-display font-bold text-slate-900 text-base">AetherSolve</span>
           </Link>
