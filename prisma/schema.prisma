@@ -8,6 +8,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ─────────────────────────────────────────────
+//  ADMIN
+// ─────────────────────────────────────────────
 model Admin {
   id        String   @id @default(cuid())
   email     String   @unique
@@ -17,6 +20,9 @@ model Admin {
   updatedAt DateTime @updatedAt
 }
 
+// ─────────────────────────────────────────────
+//  TESTIMONIAL
+// ─────────────────────────────────────────────
 model Testimonial {
   id        String   @id @default(cuid())
   name      String
@@ -31,6 +37,9 @@ model Testimonial {
   updatedAt DateTime @updatedAt
 }
 
+// ─────────────────────────────────────────────
+//  ANNOUNCEMENT
+// ─────────────────────────────────────────────
 model Announcement {
   id        String   @id @default(cuid())
   title     String
@@ -42,6 +51,9 @@ model Announcement {
   updatedAt DateTime @updatedAt
 }
 
+// ─────────────────────────────────────────────
+//  JOB POSTING
+// ─────────────────────────────────────────────
 model JobPosting {
   id           String        @id @default(cuid())
   title        String
@@ -58,50 +70,91 @@ model JobPosting {
   applications Application[]
 }
 
+// ─────────────────────────────────────────────
+//  APPLICATION
+// ─────────────────────────────────────────────
 model Application {
-  id               String     @id @default(cuid())
-  jobId            String
-  job              JobPosting @relation(fields: [jobId], references: [id])
+  id              String     @id @default(cuid())
+  jobId           String
+  job             JobPosting @relation(fields: [jobId], references: [id])
 
   // Personal Info
-  firstName        String
-  lastName         String
-  email            String
-  phone            String
+  firstName       String
+  lastName        String
+  email           String
+  phone           String
 
   // Professional Info
-  currentRole      String?
-  previousCompany  String?
-  skills           String[]   @default([])
-  experienceYears  Int?
+  currentRole     String?
+  previousCompany String?
+  skills          String[]   @default([])
+  experienceYears Int?
 
   // Intern-specific
-  isIntern         Boolean    @default(false)
-  collegeName      String?
-  degree           String?
-  yearOfStudy      String?
-  cgpa             String?
-  graduationYear   String?
+  isIntern        Boolean    @default(false)
+  collegeName     String?
+  degree          String?
+  yearOfStudy     String?
+  cgpa            String?
+  graduationYear  String?
 
   // Documents
-  resumeUrl        String?
-  driveResumeUrl   String?
-  coverLetter      String?
-  portfolioUrl     String?
-  linkedinUrl      String?
+  resumeUrl       String?
+  driveResumeUrl  String?
+  coverLetter     String?
+  portfolioUrl    String?
+  linkedinUrl     String?
 
   // Status
-  status           String     @default("pending")
-  adminNotes       String?
+  status          String     @default("pending")
+  adminNotes      String?
 
   // Admin-assigned offer fields — filled by admin before approving
-  joiningDate      String?
-  workingHours     String?
-  internStartDate  String?
-  internEndDate    String?
-  internWorkHours  String?
-  stipend          String?
+  joiningDate     String?
+  workingHours    String?
+  internStartDate String?
+  internEndDate   String?
+  internWorkHours String?
+  stipend         String?
 
-  createdAt        DateTime   @default(now())
-  updatedAt        DateTime   @updatedAt
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+}
+
+// ─────────────────────────────────────────────
+//  BLOG POST
+// ─────────────────────────────────────────────
+model BlogPost {
+  id          String    @id @default(cuid())
+
+  // Core content
+  title       String
+  slug        String    @unique
+  excerpt     String
+  content     String    @db.Text
+  coverImage  String?
+
+  // Metadata
+  category    String
+  tags        String[]  @default([])
+  author      String    @default("AetherSolve Team")
+  authorRole  String?
+
+  // Source tracking
+  source      String    @default("internal") // "internal" | "linkedin"
+  linkedinUrl String?                        // if sourced from LinkedIn post
+
+  // Publishing
+  isPublished Boolean   @default(false)
+  publishedAt DateTime?
+
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+
+  // Stats
+  readTime    Int       @default(5)          // estimated read time in minutes
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
