@@ -1,199 +1,247 @@
-// src/components/public/ServicesSection.jsx
 'use client';
-import { useState } from 'react';
-import { Globe, Smartphone, Brain, Cloud, Shield, BarChart3, Cpu, Database, ArrowRight, CheckCircle } from 'lucide-react';
+// src/components/public/ServicesSection.jsx
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { Globe, Smartphone, Palette, Database, Brain, Cloud, Shield, BarChart3, ArrowRight, CheckCircle } from 'lucide-react';
 
-const tiers = [
+function useReveal(delay = 0) {
+  const ref = useRef(null);
+  const [vis, setVis] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setTimeout(() => setVis(true), delay); obs.disconnect(); } }, { threshold: 0.12 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [delay]);
+  return [ref, vis];
+}
+
+function RevealBox({ children, delay = 0, style = {} }) {
+  const [ref, vis] = useReveal(delay);
+  return (
+    <div ref={ref} style={{ opacity: vis ? 1 : 0, transform: vis ? 'translateY(0)' : 'translateY(32px)', transition: 'opacity 0.7s ease, transform 0.7s ease', ...style }}>
+      {children}
+    </div>
+  );
+}
+
+const services = [
   {
-    label: 'Tier 1 — Entry Services',
-    sublabel: 'How clients find us first',
-    color: 'brand',
-    services: [
-      {
-        icon: Globe,
-        title: 'Website & App Development',
-        desc: 'Tailored web platforms, e-commerce stores, portals, and mobile apps built for performance, scale, and your exact business logic.',
-        features: ['Custom UI/UX Design', 'React / Next.js / Flutter', 'SEO Optimised', 'Mobile-first'],
-        badge: 'Most Popular',
-      },
-      {
-        icon: Smartphone,
-        title: 'UI/UX Design',
-        desc: 'Designs that don\'t just look good — they convert. From wireframes to design systems that your users actually enjoy.',
-        features: ['Figma Prototyping', 'Design Systems', 'User Research', 'Accessibility'],
-        badge: null,
-      },
-    ],
+    icon: Globe,
+    label: 'Web Development',
+    href: '/services/web-development',
+    title: 'Websites that work as hard as you do.',
+    body: 'Custom web applications built around your exact business logic — from marketing sites to complex enterprise portals. Fast, SEO-ready, and built to scale.',
+    features: ['React / Next.js', 'E-Commerce', 'Web Portals', 'API Development'],
+    visual: 'web',
   },
   {
-    label: 'Tier 2 — Recurring Revenue',
-    sublabel: 'Where retention lives',
-    color: 'teal',
-    services: [
-      {
-        icon: Shield,
-        title: 'Annual Maintenance Contracts',
-        desc: 'Security patches, updates, uptime monitoring, and technical support — so your platform never goes dark.',
-        features: ['24/7 Monitoring', 'Security Patching', 'Performance Tuning', 'Priority Support'],
-        badge: 'High Retention',
-      },
-      {
-        icon: Cloud,
-        title: 'Cloud Hosting & Management',
-        desc: 'Fully managed AWS/GCP infrastructure under the AetherSolve banner. We handle DevOps so you focus on your business.',
-        features: ['AWS / GCP / Azure', 'Auto-scaling', 'CDN & Edge', 'CI/CD Pipelines'],
-        badge: null,
-      },
-      {
-        icon: BarChart3,
-        title: 'SEO & Digital Marketing',
-        desc: 'Monthly retainer campaigns driven by keyword data, competitor analysis, and content that actually ranks.',
-        features: ['Technical SEO', 'Content Strategy', 'Paid Ads', 'Analytics Reports'],
-        badge: null,
-      },
-    ],
+    icon: Smartphone,
+    label: 'Mobile Apps',
+    href: '/services/mobile-apps',
+    title: 'Apps users actually keep on their phone.',
+    body: 'iOS, Android, and cross-platform apps with a focus on retention and performance. From concept through App Store submission.',
+    features: ['React Native / Flutter', 'iOS & Android', 'Push Notifications', 'Offline Support'],
+    visual: 'mobile',
+    flip: true,
   },
   {
-    label: 'Tier 3 — Deep Ecosystem',
-    sublabel: 'Long-term partnerships',
-    color: 'amber',
-    services: [
-      {
-        icon: Database,
-        title: 'Custom ERP / CRM Systems',
-        desc: 'Build your operational backbone — HR, payroll, inventory, sales pipeline. When you run on our ERP, we grow together.',
-        features: ['Module-based Build', 'Role Permissions', 'Reporting Dashboards', 'API Integrations'],
-        badge: 'Goldmine',
-      },
-      {
-        icon: Brain,
-        title: 'AI & Automation Integration',
-        desc: 'LLM-powered internal tools, workflow automation, intelligent chatbots, and data pipelines — the highest-growth service of this decade.',
-        features: ['LangChain / GPT-4o', 'Workflow Bots', 'Predictive Analytics', 'Custom LLM Fine-tuning'],
-        badge: 'High Growth',
-      },
-      {
-        icon: Cpu,
-        title: 'SaaS Co-Development',
-        desc: 'Partner with businesses that have the vision but not the tech team. We build and maintain their SaaS — equity or retainer models.',
-        features: ['Full Stack Build', 'Equity / Revenue Share', 'Ongoing Maintenance', 'Scaling Strategy'],
-        badge: null,
-      },
-    ],
+    icon: Brain,
+    label: 'AI Integration',
+    href: '/services/ai-integration',
+    title: 'Automate the work that slows you down.',
+    body: 'LLM-powered chatbots, document intelligence, workflow automation, and predictive analytics. Built for production, not demos.',
+    features: ['GPT-4o / Claude', 'Workflow Bots', 'LangChain / RAG', 'Fine-tuning'],
+    visual: 'ai',
+  },
+  {
+    icon: Database,
+    label: 'ERP & CRM',
+    href: '/services/erp-crm',
+    title: 'Your operations, fully automated.',
+    body: 'Custom ERP built to your exact workflows — HR, payroll, inventory, sales pipeline. No per-seat fees. No forced templates.',
+    features: ['HR & Payroll', 'Inventory', 'CRM Pipelines', 'BI Dashboards'],
+    visual: 'erp',
+    flip: true,
+  },
+  {
+    icon: Cloud,
+    label: 'Cloud & Hosting',
+    href: '/services/cloud-hosting',
+    title: 'Never think about infrastructure again.',
+    body: 'Fully managed AWS/GCP infrastructure with 24/7 monitoring, auto-scaling, security patching, and a 99.97% uptime SLA.',
+    features: ['AWS / GCP / Azure', 'Auto-scaling', 'CI/CD Pipelines', '24/7 Monitoring'],
+    visual: 'cloud',
   },
 ];
 
-const colorMap = {
-  brand: { pill: 'bg-brand-50 text-brand-700 border-brand-100', badge: 'bg-brand-600 text-white', icon: 'bg-brand-50 text-brand-600', border: 'border-brand-100', dot: 'bg-brand-500' },
-  teal: { pill: 'bg-teal-50 text-teal-700 border-teal-100', badge: 'bg-teal-600 text-white', icon: 'bg-teal-50 text-teal-600', border: 'border-teal-100', dot: 'bg-teal-500' },
-  amber: { pill: 'bg-amber-50 text-amber-700 border-amber-100', badge: 'bg-amber-500 text-white', icon: 'bg-amber-50 text-amber-600', border: 'border-amber-100', dot: 'bg-amber-500' },
-};
+// Simple visual mockup per service
+function Visual({ type }) {
+  const base = { borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border)', background: 'var(--surface-2)', padding: '20px', minHeight: '220px', display: 'flex', flexDirection: 'column', gap: '10px' };
+
+  if (type === 'web') return (
+    <div style={base}>
+      <div style={{ display: 'flex', gap: '6px', marginBottom: '4px' }}>
+        {['#ff5f57','#febc2e','#28c840'].map(c => <span key={c} style={{ width: '10px', height: '10px', borderRadius: '50%', background: c }} />)}
+      </div>
+      <div style={{ height: '12px', borderRadius: '6px', background: 'var(--bg-3)', width: '60%' }} />
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', flex: 1 }}>
+        {[0,1,2].map(i => <div key={i} style={{ borderRadius: '10px', background: i===0 ? 'var(--accent-soft)' : 'var(--bg-3)', border: i===0 ? '1px solid var(--accent-soft2)' : '1px solid var(--border)' }} />)}
+      </div>
+      <div style={{ height: '8px', borderRadius: '100px', background: 'var(--accent)', width: '40%' }} />
+    </div>
+  );
+
+  if (type === 'mobile') return (
+    <div style={{ ...base, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: '16px' }}>
+      {[0,1].map(i => (
+        <div key={i} style={{ width: '90px', height: '160px', borderRadius: '16px', border: '2px solid var(--border-2)', background: 'var(--bg-3)', display: 'flex', flexDirection: 'column', padding: '10px', gap: '6px', transform: i===1 ? 'translateY(16px)' : 'none' }}>
+          <div style={{ height: '8px', borderRadius: '100px', background: i===0 ? 'var(--accent)' : 'var(--bg-2)', width: '50%' }} />
+          {[1,2,3].map(j => <div key={j} style={{ flex: 1, borderRadius: '6px', background: 'var(--bg-2)' }} />)}
+        </div>
+      ))}
+    </div>
+  );
+
+  if (type === 'ai') return (
+    <div style={base}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+        <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <Brain size={14} style={{ color: '#fff' }} />
+        </div>
+        <div style={{ background: 'var(--bg-3)', borderRadius: '12px 12px 12px 0', padding: '10px 14px', fontSize: '12px', fontFamily: 'var(--font-body)', color: 'var(--text-2)', flex: 1 }}>
+          Analysing 4,847 documents... ✓<br />Extracted 23 key insights.
+        </div>
+      </div>
+      <div style={{ alignSelf: 'flex-end', background: 'var(--accent-soft2)', border: '1px solid var(--accent-soft2)', borderRadius: '12px 12px 0 12px', padding: '10px 14px', fontSize: '12px', fontFamily: 'var(--font-body)', color: 'var(--accent)', maxWidth: '80%' }}>
+        Summarise Q3 compliance reports
+      </div>
+      <div style={{ display: 'flex', gap: '6px' }}>
+        {[1,2,3].map(i => <div key={i} style={{ flex: 1, height: '6px', borderRadius: '100px', background: i===1 ? 'var(--accent)' : 'var(--bg-3)' }} />)}
+      </div>
+    </div>
+  );
+
+  if (type === 'erp') return (
+    <div style={base}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+        {[['HR','24 active'],['Payroll','₹12.4L'],['Inventory','847 SKUs'],['CRM','48 leads']].map(([k,v]) => (
+          <div key={k} style={{ padding: '12px', background: 'var(--bg-3)', borderRadius: '10px', border: '1px solid var(--border)' }}>
+            <div style={{ fontSize: '10px', color: 'var(--text-4)', fontFamily: 'var(--font-body)', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{k}</div>
+            <div style={{ fontSize: '15px', fontWeight: 700, fontFamily: 'var(--font-display)', color: 'var(--text)' }}>{v}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{ height: '8px', borderRadius: '100px', background: 'var(--bg-3)', overflow: 'hidden' }}>
+        <div style={{ height: '100%', width: '72%', background: 'var(--accent)', borderRadius: '100px' }} />
+      </div>
+    </div>
+  );
+
+  if (type === 'cloud') return (
+    <div style={base}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+        <span style={{ fontSize: '11px', fontWeight: 700, fontFamily: 'var(--font-body)', color: 'var(--text-4)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>System Status</span>
+        <span style={{ fontSize: '11px', fontWeight: 700, color: '#22c55e', background: 'rgba(34,197,94,0.1)', padding: '2px 8px', borderRadius: '100px' }}>● All Green</span>
+      </div>
+      {[['API Gateway','99.99%'],['Database Cluster','99.97%'],['CDN Edge','100%'],['Backups','Verified']].map(([s,v]) => (
+        <div key={s} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--border)' }}>
+          <span style={{ fontSize: '12px', color: 'var(--text-2)', fontFamily: 'var(--font-body)' }}>{s}</span>
+          <span style={{ fontSize: '12px', fontWeight: 700, color: '#22c55e', fontFamily: 'var(--font-body)' }}>{v}</span>
+        </div>
+      ))}
+    </div>
+  );
+
+  return <div style={{ ...base, minHeight: '220px' }} />;
+}
 
 export default function ServicesSection() {
-  const [activeTier, setActiveTier] = useState(0);
-
   return (
-    <section id="services" className="py-20 lg:py-28 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <span className="section-label mb-4">What We Do</span>
-          <h2 className="font-display text-4xl lg:text-5xl font-bold text-slate-900 mt-3 mb-4">
-            A Service Model That
-            <span className="gradient-text block">Compounds Over Time</span>
+    <section id="services" style={{ background: 'var(--bg)', padding: '120px 0' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
+
+        {/* Section header — centered */}
+        <RevealBox style={{ textAlign: 'center', marginBottom: '100px' }}>
+          <span className="text-label" style={{ display: 'block', marginBottom: '16px' }}>What We Build</span>
+          <h2 className="text-display" style={{ color: 'var(--text)', marginBottom: '20px' }}>
+            Everything your business<br />needs to grow online.
           </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Every project we deliver automatically rolls into recurring services. 
-            That's the architecture of a software partner that grows with you — not chases new clients every quarter.
+          <p className="text-lead" style={{ maxWidth: '520px', margin: '0 auto' }}>
+            A full-stack technology partner — from the first pixel to production infrastructure.
           </p>
-        </div>
+        </RevealBox>
 
-        {/* Tier tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {tiers.map((tier, i) => {
-            const c = colorMap[tier.color];
-            return (
-              <button
-                key={i}
-                onClick={() => setActiveTier(i)}
-                className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all ${
-                  activeTier === i ? `${c.pill} border` : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300'
-                }`}
-              >
-                {tier.label.split('—')[0].trim()}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Active tier */}
-        {tiers.map((tier, ti) => {
-          if (ti !== activeTier) return null;
-          const c = colorMap[tier.color];
+        {/* Alternating service blocks */}
+        {services.map((svc, i) => {
+          const Icon = svc.icon;
+          const isFlip = svc.flip;
           return (
-            <div key={ti}>
-              <div className="flex items-center gap-3 mb-6">
-                <span className={`w-2.5 h-2.5 rounded-full ${c.dot}`} />
-                <h3 className="font-semibold text-slate-700">{tier.label}</h3>
-                <span className="text-slate-400 text-sm">— {tier.sublabel}</span>
+            <div key={svc.label} style={{ marginBottom: '100px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'center' }}>
+
+                {/* Text side */}
+                <RevealBox delay={i * 50} style={{ order: isFlip ? 2 : 1 }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '5px 12px', borderRadius: '100px', background: 'var(--accent-soft)', marginBottom: '20px' }}>
+                    <Icon size={13} style={{ color: 'var(--accent)' }} />
+                    <span style={{ fontSize: '11.5px', fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-body)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{svc.label}</span>
+                  </div>
+
+                  <h3 className="text-title" style={{ color: 'var(--text)', marginBottom: '16px' }}>{svc.title}</h3>
+                  <p className="text-body" style={{ marginBottom: '24px' }}>{svc.body}</p>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '28px' }}>
+                    {svc.features.map(f => (
+                      <span key={f} style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '5px 12px', borderRadius: '100px', background: 'var(--bg-2)', border: '1px solid var(--border)', fontFamily: 'var(--font-body)', fontSize: '12.5px', fontWeight: 500, color: 'var(--text-2)' }}>
+                        <CheckCircle size={11} style={{ color: 'var(--accent)', flexShrink: 0 }} />
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+
+                  <Link href={svc.href} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 700, color: 'var(--accent)', textDecoration: 'none', transition: 'gap 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.gap = '10px'}
+                  onMouseLeave={e => e.currentTarget.style.gap = '6px'}
+                  >
+                    Learn more <ArrowRight size={15} />
+                  </Link>
+                </RevealBox>
+
+                {/* Visual side */}
+                <RevealBox delay={i * 50 + 100} style={{ order: isFlip ? 1 : 2 }}>
+                  <Visual type={svc.visual} />
+                </RevealBox>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {tier.services.map((svc, si) => {
-                  const Icon = svc.icon;
-                  return (
-                    <div
-                      key={si}
-                      className={`card p-6 relative group hover:-translate-y-1 transition-transform duration-300 border ${c.border}`}
-                    >
-                      {svc.badge && (
-                        <span className={`absolute top-4 right-4 text-[10px] font-bold px-2.5 py-1 rounded-full ${c.badge}`}>
-                          {svc.badge}
-                        </span>
-                      )}
-                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 ${c.icon}`}>
-                        <Icon size={20} />
-                      </div>
-                      <h4 className="font-display font-bold text-slate-900 text-lg mb-2">{svc.title}</h4>
-                      <p className="text-slate-500 text-sm leading-relaxed mb-4">{svc.desc}</p>
-                      <ul className="space-y-1.5">
-                        {svc.features.map(f => (
-                          <li key={f} className="flex items-center gap-2 text-xs text-slate-600">
-                            <CheckCircle size={12} className="text-teal-500 shrink-0" />
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
-                      <button className="mt-5 flex items-center gap-1 text-xs font-semibold text-brand-600 hover:gap-2 transition-all">
-                        Learn more <ArrowRight size={12} />
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
+              {i < services.length - 1 && <div style={{ height: '1px', background: 'var(--border)', marginTop: '0' }} />}
             </div>
           );
         })}
 
-        {/* Flow diagram */}
-        <div className="mt-16 bg-white rounded-2xl border border-slate-200 p-6 lg:p-8">
-          <p className="text-center text-sm font-semibold text-slate-400 uppercase tracking-wider mb-6">The AetherSolve Client Journey</p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {['Build it', 'Host it', 'Maintain it', 'Grow it', 'Add AI to it'].map((step, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="flex flex-col items-center gap-1">
-                  <div className="bg-gradient-to-br from-brand-500 to-teal-500 text-white text-xs font-bold px-4 py-2 rounded-full">
-                    {step}
+        {/* Journey strip */}
+        <RevealBox>
+          <div style={{ background: 'var(--text)', borderRadius: '24px', padding: '48px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)', backgroundSize: '24px 24px', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '400px', height: '200px', borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(255,92,26,0.1), transparent 70%)', pointerEvents: 'none' }} />
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '20px' }}>
+              The AetherSolve Model
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '8px', position: 'relative', zIndex: 1 }}>
+              {['Build it','Host it','Maintain it','Grow it','Add AI'].map((s, i) => (
+                <div key={s} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ padding: '9px 20px', borderRadius: '100px', fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 700, background: i===4 ? 'var(--accent)' : 'rgba(255,255,255,0.08)', color: '#fff', border: i===4 ? 'none' : '1px solid rgba(255,255,255,0.1)', boxShadow: i===4 ? '0 4px 20px rgba(255,92,26,0.4)' : 'none' }}>
+                      {s}
+                    </div>
+                    <div style={{ fontSize: '9.5px', color: 'rgba(255,255,255,0.2)', marginTop: '5px', fontFamily: 'var(--font-body)', letterSpacing: '0.06em' }}>
+                      {['One-time','Monthly','AMC','New Modules','Retainer'][i]}
+                    </div>
                   </div>
-                  <span className="text-[10px] text-slate-400">
-                    {['One-time', 'Monthly', 'AMC', 'New modules', 'Retainer'][i]}
-                  </span>
+                  {i < 4 && <ArrowRight size={14} style={{ color: 'rgba(255,255,255,0.2)', flexShrink: 0 }} />}
                 </div>
-                {i < 4 && <ArrowRight size={16} className="text-slate-300 shrink-0" />}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        </RevealBox>
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
-// src/components/public/AnnouncementBar.jsx
 'use client';
+// src/components/public/AnnouncementBar.jsx
 import { useState, useEffect } from 'react';
 import { X, Sparkles, ArrowRight } from 'lucide-react';
 import { useWebSocket } from '@/hooks/useWebSocket';
@@ -11,21 +11,15 @@ export default function AnnouncementBar() {
   const { on } = useWebSocket('public');
 
   useEffect(() => {
-    const savedDismissed = JSON.parse(sessionStorage.getItem('dismissedAnnouncements') || '[]');
-    setDismissed(new Set(savedDismissed));
-
-    fetch('/api/announcements')
-      .then(r => r.json())
-      .then(d => setAnnouncements(d.announcements || []));
+    const saved = JSON.parse(sessionStorage.getItem('dismissedAnnouncements') || '[]');
+    setDismissed(new Set(saved));
+    fetch('/api/announcements').then(r => r.json()).then(d => setAnnouncements(d.announcements || []));
   }, []);
 
   useEffect(() => {
     const unsub = on('announcement_update', (payload) => {
-      if (payload.action === 'create') {
-        setAnnouncements(prev => [payload.announcement, ...prev]);
-      } else if (payload.action === 'delete') {
-        setAnnouncements(prev => prev.filter(a => a.id !== payload.id));
-      }
+      if (payload.action === 'create') setAnnouncements(p => [payload.announcement, ...p]);
+      if (payload.action === 'delete') setAnnouncements(p => p.filter(a => a.id !== payload.id));
     });
     return unsub;
   }, [on]);
@@ -40,54 +34,36 @@ export default function AnnouncementBar() {
   };
 
   if (!visible.length) return null;
-
   const ann = visible[current] || visible[0];
   if (!ann) return null;
 
   return (
-    <div className="relative z-50 bg-gradient-to-r from-brand-700 via-brand-600 to-teal-600 text-white">
-      <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3 flex-1 min-w-0">
-          <span className="hidden sm:flex items-center gap-1 bg-white/20 rounded-full px-2.5 py-0.5 text-xs font-semibold shrink-0">
-            <Sparkles size={10} />
-            NEW
+    <div style={{ background: 'var(--text)', color: 'var(--bg)', position: 'relative', zIndex: 200 }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '10px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1, minWidth: 0 }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', background: 'var(--accent)', color: '#fff', borderRadius: '100px', padding: '2px 9px', fontSize: '10.5px', fontWeight: 700, fontFamily: 'var(--font-body)', letterSpacing: '0.06em', flexShrink: 0 }}>
+            <Sparkles size={9} /> NEW
           </span>
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="font-semibold text-sm truncate">{ann.title}</span>
-            <span className="text-white/70 text-sm hidden md:inline truncate">— {ann.content}</span>
-          </div>
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.85)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            {ann.title}
+          </span>
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(255,255,255,0.4)', hidden: true }} className="hidden-mobile">
+            — {ann.content}
+          </span>
           {ann.link && (
-            <a
-              href={ann.link}
-              className="hidden sm:inline-flex items-center gap-1 text-xs font-semibold bg-white/20 hover:bg-white/30 px-2.5 py-1 rounded-full transition-colors shrink-0"
-            >
-              {ann.linkText || 'Learn more'}
-              <ArrowRight size={10} />
+            <a href={ann.link} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '12px', fontWeight: 700, color: 'var(--accent)', textDecoration: 'none', flexShrink: 0 }}>
+              {ann.linkText || 'Learn more'} <ArrowRight size={11} />
             </a>
           )}
         </div>
-
-        <div className="flex items-center gap-2 shrink-0">
-          {visible.length > 1 && (
-            <div className="hidden sm:flex items-center gap-1">
-              {visible.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrent(i)}
-                  className={`w-1.5 h-1.5 rounded-full transition-all ${i === current ? 'bg-white' : 'bg-white/40'}`}
-                />
-              ))}
-            </div>
-          )}
-          <button
-            onClick={() => dismiss(ann.id)}
-            className="p-1 rounded-full hover:bg-white/20 transition-colors"
-            aria-label="Dismiss announcement"
-          >
-            <X size={14} />
-          </button>
-        </div>
+        <button onClick={() => dismiss(ann.id)} style={{ width: '26px', height: '26px', borderRadius: '50%', border: 'none', background: 'rgba(255,255,255,0.1)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.5)', flexShrink: 0, transition: 'all 0.15s' }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.2)'; e.currentTarget.style.color = '#fff'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; }}
+        >
+          <X size={13} />
+        </button>
       </div>
+      <style>{`@media(max-width:767px){.hidden-mobile{display:none!important}}`}</style>
     </div>
   );
 }

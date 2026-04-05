@@ -1,182 +1,169 @@
-// src/components/public/HeroSection.jsx
 'use client';
-import { useEffect, useRef } from 'react';
-import { ArrowRight, Play, Star, Users, Code, Award } from 'lucide-react';
+// src/components/public/HeroSection.jsx
+import { useEffect, useRef, useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 
+const WORDS = ['Websites', 'Mobile Apps', 'ERP Systems', 'AI Agents', 'SaaS Products'];
 
+function useReveal() {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold: 0.15 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+  return [ref, visible];
+}
 
 export default function HeroSection() {
-  const gradientRef = useRef(null);
+  const [wordIdx, setWordIdx] = useState(0);
+  const [wordVisible, setWordVisible] = useState(true);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!gradientRef.current) return;
-      const { clientX, clientY } = e;
-      const x = (clientX / window.innerWidth) * 100;
-      const y = (clientY / window.innerHeight) * 100;
-      gradientRef.current.style.background = `radial-gradient(ellipse at ${x}% ${y}%, rgba(12,141,233,0.12) 0%, rgba(20,184,166,0.06) 40%, transparent 70%)`;
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    const t = setInterval(() => {
+      setWordVisible(false);
+      setTimeout(() => { setWordIdx(i => (i + 1) % WORDS.length); setWordVisible(true); }, 320);
+    }, 2600);
+    return () => clearInterval(t);
   }, []);
 
-  return (
-    <section className="relative overflow-hidden bg-white mesh-bg min-h-[90vh] flex flex-col justify-center">
-      {/* Dynamic gradient layer */}
-      <div ref={gradientRef} className="absolute inset-0 pointer-events-none transition-all duration-700" />
+  const TICKER = ['Web Development','Mobile Apps','UI/UX Design','ERP Systems','AI Integration','Cloud Hosting','Fintech','EdTech','HealthTech','SaaS','DevOps','Analytics'];
 
-      {/* Geometric decoration */}
-      <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.03] pointer-events-none">
-        <svg viewBox="0 0 600 600" className="w-full h-full">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#0c8de9" strokeWidth="1"/>
-            </pattern>
-          </defs>
-          <rect width="600" height="600" fill="url(#grid)" />
-        </svg>
+  return (
+    <section style={{ background: 'var(--bg)', paddingTop: '64px', overflow: 'hidden' }}>
+
+      {/* ── HERO CENTER ── */}
+      <div style={{ maxWidth: '760px', margin: '0 auto', padding: '100px 24px 80px', textAlign: 'center' }}>
+
+        {/* Eyebrow pill */}
+        <div className="animate-fade-up" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '100px', border: '1.5px solid var(--border-2)', background: 'var(--accent-soft)', marginBottom: '32px' }}>
+          <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)', display: 'inline-block', animation: 'pulse-ring 2s infinite' }} />
+          <span style={{ fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--accent)' }}>
+            IT Services &amp; Product Company
+          </span>
+        </div>
+
+        {/* Headline */}
+        <h1 className="animate-fade-up stagger-1" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(44px, 9vw, 88px)', lineHeight: 1.0, letterSpacing: '-3px', color: 'var(--text)', marginBottom: '16px' }}>
+          We Build
+          <br />
+          <span style={{
+            color: 'var(--accent)',
+            display: 'inline-block',
+            opacity: wordVisible ? 1 : 0,
+            transform: wordVisible ? 'translateY(0)' : 'translateY(16px)',
+            transition: 'opacity 0.32s ease, transform 0.32s ease',
+          }}>
+            {WORDS[wordIdx]}
+          </span>
+          <br />
+          That Scale.
+        </h1>
+
+        {/* Tagline */}
+        <p className="animate-fade-up stagger-2" style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(15px, 1.8vw, 18px)', lineHeight: 1.75, color: 'var(--text-3)', maxWidth: '560px', margin: '0 auto 40px' }}>
+          From tailored websites and mobile apps to enterprise ERP systems, AI integrations,
+          and managed cloud infrastructure — we build, host, and grow your digital presence end-to-end.
+        </p>
+
+        {/* CTAs */}
+        <div className="animate-fade-up stagger-3" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '56px' }}>
+          <a href="#services" className="btn btn-primary">
+            Explore Services <ArrowRight size={16} />
+          </a>
+          <a href="/company/work" className="btn btn-secondary">
+            View Our Work
+          </a>
+        </div>
+
+        {/* Stats row */}
+        <div className="animate-fade-up stagger-4" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '40px', paddingTop: '40px', borderTop: '1px solid var(--border)' }}>
+          {[['150+','Projects Delivered'],['98%','Client Retention'],['50+','Team Members'],['12+','Industries']].map(([v,l]) => (
+            <div key={l} style={{ textAlign: 'center' }}>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,3vw,34px)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-1px', lineHeight: 1 }}>{v}</div>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 500, color: 'var(--text-4)', marginTop: '4px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{l}</div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Floating orbs */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-brand-100 rounded-full blur-3xl opacity-40 animate-pulse-slow" />
-      <div className="absolute bottom-20 left-10 w-80 h-80 bg-teal-100 rounded-full blur-3xl opacity-30 animate-pulse-slow" style={{ animationDelay: '1.5s' }} />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 lg:py-28">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left — Text */}
-          <div className="space-y-8 animate-fade-up">
-            {/* Label */}
-            <div className="inline-flex items-center gap-2 bg-brand-50 border border-brand-100 rounded-full px-4 py-2">
-              <span className="w-2 h-2 bg-teal-500 rounded-full animate-pulse" />
-              <span className="text-xs font-semibold text-brand-700 tracking-widest uppercase">
-                IT Services & Product Company
-              </span>
-            </div>
-
-            {/* Headline */}
-            <div>
-              <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-800 text-slate-900 leading-[1.05] tracking-tight">
-                Building
-                <span className="block gradient-text">Tomorrow's</span>
-                Solutions
-                <span className="text-brand-600"> Today.</span>
-              </h1>
-              <h4 className='font-display text-1xl sm:text-4xl lg:text-3xl font-900 text-slate-600 leading-[0.05] tracking-tight'>
-              Think it. AetherSolve it.
-
-              </h4>
-            </div>
-
-            {/* Subtext */}
-            <p className="text-lg text-slate-500 leading-relaxed max-w-xl">
-              From tailored websites and mobile apps to enterprise ERP systems, AI integrations, 
-              and managed cloud infrastructure — we build, host, and grow your digital presence end-to-end.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4">
-              <a href="#services" className="btn-primary text-base px-7 py-3.5">
-                Explore Services
-                <ArrowRight size={18} />
-              </a>
-              <a href="#work" className="btn-secondary text-base px-7 py-3.5">
-                <Play size={16} className="text-brand-500" />
-                View Our Work
-              </a>
-            </div>
-
-            {/* Trust indicators */}
-            <div className="flex flex-wrap items-center gap-6 pt-2">
-              <div className="flex items-center gap-2 text-slate-400 text-sm">
-                <div className="flex -space-x-2">
-                  {['A', 'B', 'C', 'D'].map((l, i) => (
-                    <div
-                      key={i}
-                      className="w-7 h-7 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-white"
-                      style={{ background: ['#0c8de9','#14b8a6','#f59e0b','#6366f1'][i] }}
-                    >
-                      {l}
-                    </div>
-                  ))}
-                </div>
-              
-              </div>
-             
+      {/* ── VISUAL CARD ── */}
+      <div style={{ maxWidth: '860px', margin: '0 auto', padding: '0 24px 0' }}>
+        <div className="animate-fade-up" style={{
+          background: 'var(--bg-3)', borderRadius: '24px', overflow: 'hidden',
+          border: '1px solid var(--border)',
+          boxShadow: '0 40px 120px rgba(0,0,0,0.12)',
+        }}>
+          {/* Window chrome */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '14px 18px', background: 'var(--surface)', borderBottom: '1px solid var(--border)' }}>
+            <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f57' }} />
+            <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#febc2e' }} />
+            <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#28c840' }} />
+            <div style={{ flex: 1, height: '26px', borderRadius: '6px', background: 'var(--bg-2)', margin: '0 12px', display: 'flex', alignItems: 'center', paddingLeft: '12px' }}>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: '11.5px', color: 'var(--text-4)' }}>aethersolve.com/dashboard</span>
             </div>
           </div>
 
-          {/* Right — Visual Card Stack */}
-          <div className="relative hidden lg:block animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            <div className="relative">
-              {/* Main card */}
-              <div className="bg-white rounded-2xl shadow-2xl border border-slate-100 p-6 relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Live Dashboard</span>
-                  <span className="flex items-center gap-1.5 text-xs text-teal-600 font-medium bg-teal-50 px-2.5 py-1 rounded-full">
-                    <span className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-pulse" />
-                    System Healthy
-                  </span>
+          {/* Dashboard mockup */}
+          <div style={{ padding: '24px', display: 'grid', gridTemplateColumns: '200px 1fr', gap: '16px', minHeight: '300px' }}>
+            {/* Sidebar */}
+            <div style={{ background: 'var(--surface)', borderRadius: '14px', padding: '16px', border: '1px solid var(--border)' }}>
+              <div style={{ width: '80px', height: '8px', borderRadius: '100px', background: 'var(--accent)', marginBottom: '20px' }} />
+              {['Overview','Projects','Analytics','Clients','Settings'].map((item, i) => (
+                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', borderRadius: '8px', marginBottom: '2px', background: i === 0 ? 'var(--accent-soft)' : 'transparent' }}>
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: i === 0 ? 'var(--accent)' : 'var(--border-2)', flexShrink: 0 }} />
+                  <div style={{ height: '7px', borderRadius: '100px', background: i === 0 ? 'var(--accent)' : 'var(--bg-3)', width: `${45 + i * 8}px` }} />
                 </div>
+              ))}
+            </div>
 
-                {/* Fake chart bars */}
-                <div className="flex items-end gap-2 h-24 mb-4">
-                  {[60, 80, 45, 90, 70, 85, 95, 75, 88, 65, 92, 78].map((h, i) => (
-                    <div
-                      key={i}
-                      className="flex-1 rounded-t-md"
-                      style={{
-                        height: `${h}%`,
-                        background: i === 10 ? 'linear-gradient(to top, #006ec7, #0c8de9)' : i % 3 === 0 ? '#e0effe' : '#f1f5f9',
-                        transition: `height 0.5s ease ${i * 0.05}s`,
-                      }}
-                    />
-                  ))}
-                </div>
+            {/* Main area */}
+            <div>
+              {/* Metric cards */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '10px', marginBottom: '14px' }}>
+                {[['99.97%','Uptime','var(--accent)'],['<120ms','Response','#22c55e'],['10M+','Req/Day','#3b82f6']].map(([v,l,c]) => (
+                  <div key={l} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '14px', textAlign: 'center' }}>
+                    <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '18px', color: c }}>{v}</div>
+                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '10px', color: 'var(--text-4)', marginTop: '2px' }}>{l}</div>
+                  </div>
+                ))}
+              </div>
 
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { label: 'Uptime', value: '99.97%', color: 'text-teal-600' },
-                    { label: 'Response', value: '< 120ms', color: 'text-brand-600' },
-                    { label: 'Health', value: 'Active', color: 'text-brand-300' },
-
-                  ].map(item => (
-                    <div key={item.label} className="bg-slate-50 rounded-xl p-3 text-center">
-                      <div className={`text-lg font-bold font-display ${item.color}`}>{item.value}</div>
-                      <div className="text-[10px] text-slate-400 font-medium">{item.label}</div>
-                    </div>
+              {/* Chart */}
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '16px' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-end', gap: '4px', height: '70px' }}>
+                  {[40,60,35,80,55,90,70,85,60,95,72,100].map((h,i) => (
+                    <div key={i} style={{ flex: 1, borderRadius: '3px 3px 0 0', height: `${h}%`, background: i===11 ? 'var(--accent)' : i>8 ? 'var(--accent-soft2)' : 'var(--bg-3)', transition: `height 0.6s ease ${i*0.05}s` }} />
                   ))}
                 </div>
               </div>
 
-              {/* Floating mini cards */}
-              <div className="absolute -top-6 -right-6 bg-white rounded-xl shadow-lg border border-slate-100 p-3 flex items-center gap-2.5">
-                <div className="w-8 h-8 bg-teal-100 rounded-lg flex items-center justify-center">
-                  <Award size={16} className="text-teal-600" />
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-slate-800">ISO Certified</div>
-                  <div className="text-[10px] text-slate-400">Quality Assured</div>
-                </div>
+              {/* Activity list */}
+              <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                {[['FinEdge platform deployed','2m ago'],['EduPath — 1K users online','8m ago'],['AI pipeline processed 4K docs','12m ago']].map(([t,time]) => (
+                  <div key={t} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '8px' }}>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '11.5px', color: 'var(--text-2)' }}>{t}</span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '10.5px', color: 'var(--text-4)' }}>{time}</span>
+                  </div>
+                ))}
               </div>
-
-              <div className="absolute -bottom-4 -left-6 bg-white rounded-xl shadow-lg border border-slate-100 p-3 flex items-center gap-2.5">
-                <div className="w-8 h-8 bg-brand-100 rounded-lg flex items-center justify-center">
-                  <Code size={16} className="text-brand-600" />
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-slate-800">10M+ Lines</div>
-                  <div className="text-[10px] text-slate-400">Code shipped</div>
-                </div>
-              </div>
-
-              {/* Background card stack effect */}
-              <div className="absolute inset-0 bg-brand-100 rounded-2xl translate-x-4 translate-y-4 -z-10 opacity-40" />
-              <div className="absolute inset-0 bg-teal-100 rounded-2xl translate-x-8 translate-y-8 -z-20 opacity-20" />
             </div>
           </div>
         </div>
+      </div>
 
-       </div>
+      {/* ── TICKER ── */}
+      <div style={{ overflow: 'hidden', marginTop: '80px', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '14px 0', background: 'var(--bg-2)' }}>
+        <div className="animate-ticker" style={{ display: 'inline-flex' }}>
+          {[...TICKER, ...TICKER].map((item, i) => (
+            <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '24px', padding: '0 24px', fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: i % 4 === 0 ? 'var(--accent)' : 'var(--text-4)', whiteSpace: 'nowrap' }}>
+              {item}
+              <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--border-2)', display: 'inline-block' }} />
+            </span>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

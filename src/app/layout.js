@@ -29,15 +29,26 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* favicon.ico — browser tab icon (convert aether.png to .ico at favicon.io) */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        {/* PNG fallback for modern browsers */}
         <link rel="icon" href="/aether.png" type="image/png" />
-        {/* Apple devices home screen */}
         <link rel="apple-touch-icon" href="/aether.png" />
-        <meta name="theme-color" content="#006ec7" />
+        {/* Google Fonts — Outfit (display) + Manrope (body) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+        {/* Inline script to prevent flash of wrong theme */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            (function() {
+              try {
+                var theme = localStorage.getItem('ast-theme') || 'light';
+                document.documentElement.setAttribute('data-theme', theme);
+              } catch(e) {}
+            })();
+          `
+        }} />
       </head>
       <body className="antialiased">
         {children}
@@ -45,12 +56,12 @@ export default function RootLayout({ children }) {
           position="top-right"
           toastOptions={{
             style: {
-              fontFamily: 'DM Sans, sans-serif',
+              fontFamily: 'Manrope, sans-serif',
               borderRadius: '12px',
               padding: '12px 16px',
             },
-            success: { iconTheme: { primary: '#0c8de9', secondary: '#fff' } },
-            error: { iconTheme: { primary: '#ef4444', secondary: '#fff' } },
+            success: { iconTheme: { primary: '#ff5c1a', secondary: '#fff' } },
+            error:   { iconTheme: { primary: '#ef4444', secondary: '#fff' } },
           }}
         />
       </body>

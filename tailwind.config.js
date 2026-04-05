@@ -1,61 +1,53 @@
+// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',   // ← enables .dark class toggling
   content: [
-    './src/pages/**/*.{js,jsx}',
-    './src/components/**/*.{js,jsx}',
-    './src/app/**/*.{js,jsx}',
+    './src/**/*.{js,jsx,ts,tsx}',
+    './pages/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans:    ['"DM Sans"', 'sans-serif'],
+        display: ['Syne', 'sans-serif'],
+      },
       colors: {
         brand: {
-          50:  '#f0f7ff',
-          100: '#e0effe',
-          200: '#b9dffd',
-          300: '#7cc6fc',
-          400: '#36aaf8',
-          500: '#0c8de9',
-          600: '#006ec7',
-          700: '#0057a1',
-          800: '#044a85',
-          900: '#0a3f6e',
-          950: '#072849',
+          50:  '#fff7ed',
+          100: '#ffedd5',
+          200: '#fed7aa',
+          300: '#fdba74',
+          400: '#fb923c',
+          500: '#f97316',
+          600: '#ea6a0a',
+          700: '#c2570a',
+          800: '#9a3b0a',
+          900: '#7c330c',
         },
-        teal: {
-          50:  '#f0fdfa',
-          100: '#ccfbf1',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-        },
-        amber: {
-          400: '#fbbf24',
-          500: '#f59e0b',
-        },
-      },
-      fontFamily: {
-        display: ['Sora', 'sans-serif'],
-        body: ['DM Sans', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
       },
       animation: {
-        'fade-up': 'fadeUp 0.6s ease forwards',
-        'fade-in': 'fadeIn 0.4s ease forwards',
-        'slide-down': 'slideDown 0.3s ease forwards',
-        'pulse-slow': 'pulse 3s ease-in-out infinite',
+        'fade-up':    'fadeUp 0.6s ease both',
+        'fade-in':    'fadeIn 0.4s ease both',
+        'pulse-slow': 'pulse-slow 3s ease-in-out infinite',
+        'float':      'float 4s ease-in-out infinite',
       },
       keyframes: {
         fadeUp: {
-          from: { opacity: '0', transform: 'translateY(24px)' },
-          to:   { opacity: '1', transform: 'translateY(0)' },
+          from: { opacity: 0, transform: 'translateY(28px)' },
+          to:   { opacity: 1, transform: 'translateY(0)' },
         },
         fadeIn: {
-          from: { opacity: '0' },
-          to:   { opacity: '1' },
+          from: { opacity: 0 },
+          to:   { opacity: 1 },
         },
-        slideDown: {
-          from: { opacity: '0', transform: 'translateY(-8px)' },
-          to:   { opacity: '1', transform: 'translateY(0)' },
+        'pulse-slow': {
+          '0%, 100%': { opacity: 0.6 },
+          '50%':      { opacity: 1 },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%':      { transform: 'translateY(-8px)' },
         },
       },
     },

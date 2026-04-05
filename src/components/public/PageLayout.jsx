@@ -1,83 +1,97 @@
-// src/components/public/PageLayout.jsx
 'use client';
+// src/components/public/PageLayout.jsx
 import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Sun, Moon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
-export default function PageLayout({ children, breadcrumb, title, subtitle, badge, heroColor = '#006ec7' }) {
+export default function PageLayout({ children, breadcrumb, title, subtitle, badge, heroColor = 'var(--accent)' }) {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    const saved = localStorage.getItem('ast-theme') || 'light';
+    setTheme(saved);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('ast-theme', next);
+  };
+
   return (
-    <div className="min-h-screen bg-white">
+    <div style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)' }}>
+
       {/* Navbar */}
-      <nav className="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="relative w-9 h-9 shrink-0">
-              <Image src="/newaether.png" alt="AetherSolve" fill sizes="36px" className="object-contain" priority />
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="font-display font-bold text-slate-900 text-base tracking-tight">AetherSolve</span>
-              <span className="text-[10px] text-slate-400 font-medium tracking-widest uppercase">Technologies</span>
-            </div>
+      <nav style={{ position: 'sticky', top: 0, zIndex: 100, background: 'var(--navbar-bg)', backdropFilter: 'blur(24px)', borderBottom: '1px solid var(--border)' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+            <img src="/aether.png" alt="AetherSolve" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '16px', color: 'var(--text)', letterSpacing: '-0.4px' }}>AetherSolve</span>
           </Link>
-          <Link href="/" className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-brand-600 transition-colors">
-            <ArrowLeft size={15} /> Back to Home
-          </Link>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <button onClick={toggleTheme} style={{ width: '34px', height: '34px', borderRadius: '50%', border: '1.5px solid var(--border)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-4)' }}>
+              {theme === 'light' ? <Moon size={13} /> : <Sun size={13} />}
+            </button>
+            <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-body)', fontSize: '13.5px', fontWeight: 600, color: 'var(--text-3)', textDecoration: 'none', padding: '7px 14px', borderRadius: '10px', transition: 'all 0.15s' }}
+              onMouseEnter={e => e.currentTarget.style.background = 'var(--bg-2)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+            >
+              <ArrowLeft size={14} /> Back to Home
+            </Link>
+          </div>
         </div>
       </nav>
 
       {/* Hero */}
-      <div className="relative overflow-hidden" style={{ background: `linear-gradient(135deg, ${heroColor}15 0%, ${heroColor}05 100%)` }}>
-        <div className="absolute inset-0 opacity-[0.03]">
-          <svg width="100%" height="100%">
-            <defs><pattern id="pg" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#000" strokeWidth="1"/></pattern></defs>
-            <rect width="100%" height="100%" fill="url(#pg)" />
-          </svg>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-20 relative">
+      <div style={{ borderBottom: '1px solid var(--border)', padding: '72px 0 64px' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
           {breadcrumb && (
-            <div className="flex items-center gap-2 text-xs text-slate-400 mb-4">
-              <Link href="/" className="hover:text-brand-500 transition-colors">Home</Link>
-              <span>/</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+              <Link href="/" style={{ fontFamily: 'var(--font-body)', fontSize: '12.5px', color: 'var(--text-4)', textDecoration: 'none' }}>Home</Link>
+              <span style={{ color: 'var(--border-2)' }}>/</span>
               {breadcrumb.map((b, i) => (
-                <span key={i} className="flex items-center gap-2">
-                  {b.href ? <Link href={b.href} className="hover:text-brand-500 transition-colors">{b.label}</Link> : <span className="text-slate-600 font-medium">{b.label}</span>}
-                  {i < breadcrumb.length - 1 && <span>/</span>}
+                <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {b.href
+                    ? <Link href={b.href} style={{ fontFamily: 'var(--font-body)', fontSize: '12.5px', color: 'var(--text-4)', textDecoration: 'none' }}>{b.label}</Link>
+                    : <span style={{ fontFamily: 'var(--font-body)', fontSize: '12.5px', color: 'var(--text-2)', fontWeight: 600 }}>{b.label}</span>}
+                  {i < breadcrumb.length - 1 && <span style={{ color: 'var(--border-2)' }}>/</span>}
                 </span>
               ))}
             </div>
           )}
           {badge && (
-            <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full mb-4" style={{ background: `${heroColor}15`, color: heroColor }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '5px 13px', borderRadius: '100px', background: 'var(--accent-soft)', border: '1.5px solid var(--accent-soft2)', fontFamily: 'var(--font-body)', fontSize: '11.5px', fontWeight: 700, color: 'var(--accent)', letterSpacing: '0.06em', marginBottom: '16px' }}>
               {badge}
             </span>
           )}
-          <h1 className="font-display text-4xl lg:text-5xl font-bold text-slate-900 mb-4 max-w-3xl">{title}</h1>
-          {subtitle && <p className="text-lg text-slate-500 max-w-2xl leading-relaxed">{subtitle}</p>}
+          <h1 className="text-display" style={{ color: 'var(--text)', marginBottom: '16px', maxWidth: '720px' }}>{title}</h1>
+          {subtitle && <p className="text-lead" style={{ maxWidth: '600px' }}>{subtitle}</p>}
         </div>
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '80px 24px' }}>
         {children}
       </div>
 
       {/* Footer CTA */}
-      <div className="border-t border-slate-100 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="font-display font-bold text-xl text-slate-900 mb-1">Ready to get started?</h3>
-            <p className="text-slate-500 text-sm">Let's build something great together.</p>
-          </div>
-          <div className="flex gap-3">
-            <Link href="/#contact" className="btn-primary">Get In Touch <ArrowRight size={15} /></Link>
-            <Link href="/" className="btn-secondary">View All Services</Link>
+      <div style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-2)' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '64px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '20px' }}>
+          <h3 className="text-section" style={{ color: 'var(--text)' }}>Ready to get started?</h3>
+          <p className="text-body" style={{ maxWidth: '400px' }}>Let's build something great together.</p>
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <Link href="/#contact" className="btn btn-primary">Get In Touch <ArrowRight size={15} /></Link>
+            <Link href="/" className="btn btn-secondary">Back to Home</Link>
           </div>
         </div>
       </div>
 
-      {/* Simple footer */}
-      <footer className="bg-slate-900 text-slate-400 py-6 text-center text-xs">
-        © {new Date().getFullYear()} AetherSolve Technologies Pvt. Ltd. All rights reserved.
+      {/* Footer */}
+      <footer style={{ background: 'var(--footer-bg)', padding: '20px 0', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '12.5px', color: 'rgba(255,255,255,0.2)' }}>
+          © {new Date().getFullYear()} AetherSolve Technologies Pvt. Ltd.
+        </p>
       </footer>
     </div>
   );

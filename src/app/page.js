@@ -2,6 +2,7 @@
 import AnnouncementBar from '@/components/public/AnnouncementBar.jsx';
 import Navbar from '@/components/public/Navbar';
 import HeroSection from '@/components/public/HeroSection';
+import StatsSection from '@/components/public/StatsSection';
 import ServicesSection from '@/components/public/ServicesSection';
 import IndustriesSection from '@/components/public/IndustriesSection';
 import TestimonialsSection from '@/components/public/TestimonialsSection';
@@ -14,6 +15,7 @@ export default function HomePage() {
       <AnnouncementBar />
       <Navbar />
       <HeroSection />
+      <StatsSection />
       <ServicesSection />
       <IndustriesSection />
       <TestimonialsSection />

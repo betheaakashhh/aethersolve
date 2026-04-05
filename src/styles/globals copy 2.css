@@ -1,0 +1,111 @@
+/* ─────────────────────────────────────────
+   globals.css  — AetherSolve Redesign
+   Append these rules to your existing globals.css
+   ───────────────────────────────────────── */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ── */
+@layer base {
+  :root {
+    --brand:  #f97316;   /* orange-500 */
+    --dark:   #09090b;   /* zinc-950   */
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar        { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track  { background: transparent; }
+  ::-webkit-scrollbar-thumb  { background: #d4d4d8; border-radius: 9px; }
+  .dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
+}
+
+/* ── Component utilities ── */
+@layer components {
+
+  /* Section labels */
+  .section-label {
+    @apply inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.15em] uppercase text-orange-500;
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-all duration-300;
+  }
+  .card-hover {
+    @apply card hover:-translate-y-1 hover:shadow-xl hover:shadow-zinc-900/5 dark:hover:shadow-black/30;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center gap-2.5 px-7 py-3.5 text-[14px] font-semibold
+           bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-full
+           hover:bg-orange-500 dark:hover:bg-orange-500 dark:hover:text-white
+           transition-all duration-300 shadow-lg shadow-zinc-900/10;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 text-[14px] font-semibold
+           text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700
+           rounded-full hover:border-zinc-400 dark:hover:border-zinc-500 transition-all duration-300;
+  }
+  .btn-orange {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 text-[14px] font-semibold
+           bg-orange-500 text-white rounded-full hover:bg-orange-400 transition-all duration-300
+           shadow-lg shadow-orange-500/20;
+  }
+
+  /* Form inputs */
+  .input-field {
+    @apply w-full px-4 py-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800
+           rounded-xl text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-600
+           focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-400
+           transition-all text-[14px];
+  }
+}
+
+/* ── Animations ── */
+@layer utilities {
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0);    }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0);     }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+  }
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.6; }
+    50%       { opacity: 1;   }
+  }
+
+  .animate-fade-up    { animation: fadeUp    0.6s ease both; }
+  .animate-fade-in    { animation: fadeIn    0.4s ease both; }
+  .animate-slide-down { animation: slideDown 0.3s ease both; }
+  .animate-float      { animation: float     4s ease-in-out infinite; }
+  .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+
+  /* Scroll reveal — pair with IntersectionObserver or use CSS @starting-style */
+  .as-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease var(--delay, 0ms), transform 0.7s ease var(--delay, 0ms);
+  }
+  .as-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
