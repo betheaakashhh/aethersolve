@@ -259,3 +259,28 @@ body {
 .orange-glow { box-shadow: 0 0 60px rgba(255,92,26,0.15); }
 .text-accent  { color: var(--accent); }
 .bg-accent    { background: var(--accent); }
+
+.theme-adapt .bg-white { background-color: var(--surface) !important; }
+.theme-adapt .bg-slate-50,
+.theme-adapt .bg-slate-100 { background-color: var(--bg-2) !important; }
+.theme-adapt .bg-slate-200 { background-color: var(--bg-3) !important; }
+.theme-adapt .bg-slate-800,
+.theme-adapt .bg-slate-900,
+.theme-adapt .bg-slate-950 { background-color: var(--bg-2) !important; }
+
+.theme-adapt .text-slate-900,
+.theme-adapt .text-slate-800,
+.theme-adapt .text-slate-700 { color: var(--text) !important; }
+.theme-adapt .text-slate-600,
+.theme-adapt .text-slate-500,
+.theme-adapt .text-slate-400,
+.theme-adapt .text-slate-300 { color: var(--text-3) !important; }
+
+.theme-adapt .border-slate-50,
+.theme-adapt .border-slate-100,
+.theme-adapt .border-slate-200,
+.theme-adapt .border-slate-300,
+.theme-adapt .border-slate-700,
+.theme-adapt .border-slate-800 { border-color: var(--border) !important; }
+.bg-accent    { background: var(--accent); }
+.text-accent  { color: var(--accent); }

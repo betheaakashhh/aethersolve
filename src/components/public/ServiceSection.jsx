@@ -71,17 +71,8 @@ const services = [
     body: 'Custom ERP built to your exact workflows — HR, payroll, inventory, sales pipeline. No per-seat fees. No forced templates.',
     features: ['HR & Payroll', 'Inventory', 'CRM Pipelines', 'BI Dashboards'],
     visual: 'erp',
-  },
-  {
-    icon: Cloud,
-    label: 'Cloud & Hosting',
-    href: '/services/cloud-hosting-full',
-    title: 'Never think about infrastructure again.',
-    body: 'Fully managed AWS/GCP infrastructure with 24/7 monitoring, auto-scaling, security patching, and a 99.97% uptime SLA.',
-    features: ['AWS / GCP / Azure', 'Auto-scaling', 'CI/CD Pipelines', '24/7 Monitoring'],
-    visual: 'cloud',
-    flip: true,
-  },
+  }
+  
 ];
 
 // ─── Animated Visuals ───────────────────────────────────────────────────────

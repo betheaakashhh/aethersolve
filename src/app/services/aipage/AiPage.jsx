@@ -358,20 +358,16 @@ export default function AiPage() {
         :root {
           --brand: #006ec7;
           --amber: #f59e0b;
-          --dark: #04080f;
-          --dark2: #080d14;
-          --dark3: #0d1520;
+          --dark: var(--bg);
+          --dark2: var(--surface);
+          --dark3: var(--surface-2);
         }
 
         * { box-sizing: border-box; }
 
         html { scroll-behavior: smooth; }
 
-        body {
-          background: var(--dark);
-          color: #fff;
-          overflow-x: hidden;
-        }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; }
 
         .ai-page {
           background: var(--dark);
@@ -506,7 +502,7 @@ export default function AiPage() {
         ::-webkit-scrollbar-thumb { background: #006ec7; border-radius: 2px; }
       `}</style>
 
-      <div className="ai-page" ref={containerRef}>
+      <div className="ai-page theme-adapt" ref={containerRef}>
 
         {/* ── NAV ── */}
         <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#04080f]/90 backdrop-blur-xl">

@@ -264,7 +264,7 @@ export default function WebDevelopmentClient() {
   const [hoveredFeature, setHoveredFeature] = useState(null);
 
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden">
+    <div className="theme-adapt min-h-screen bg-white overflow-x-hidden">
       {/* Styles injected via globals.css */}
 
       {/* ── Navbar ── */}

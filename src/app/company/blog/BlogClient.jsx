@@ -59,6 +59,7 @@ export default function BlogClient() {
       subtitle="Engineering decisions, AI experiments, product lessons, and observations from building software for businesses across India."
       heroColor="#006ec7"
     >
+      <div className="theme-adapt">
       {/* Search + filter bar */}
       <div className="flex flex-col sm:flex-row gap-4 mb-10">
         <div className="relative flex-1">
@@ -221,7 +222,7 @@ export default function BlogClient() {
       )}
 
       {/* LinkedIn import note */}
-      <div className="mb-10 bg-blue-50 border border-blue-100 rounded-2xl p-5 flex gap-4 items-start">
+      <div className="mb-10 var(--bg-2) border var(--border) rounded-2xl p-5 flex gap-4 items-start">
         <Linkedin size={20} className="text-blue-600 shrink-0 mt-0.5" />
         <div>
           <p className="text-sm font-semibold text-slate-800 mb-1">Also on LinkedIn</p>
@@ -263,6 +264,7 @@ export default function BlogClient() {
           </div>
         )}
       </section>
+      </div>
     </PageLayout>
   );
 }
