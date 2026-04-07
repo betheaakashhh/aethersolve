@@ -42,15 +42,15 @@ export default function TestimonialsSection() {
   }, [testimonials.length]);
 
   if (loading) return (
-    <section style={{ padding: '120px 0', background: 'var(--bg-2)' }}>
+    <section style={{ padding: '80px 0', background: 'var(--bg)' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '16px' }}>
-        {[0,1,2].map(i => <div key={i} style={{ height: '200px', background: 'var(--bg-3)', borderRadius: '20px', opacity: 0.6 }} />)}
+        {[0,1,2].map(i => <div key={i} style={{ height: '200px', background: 'var(--bg)', borderRadius: '20px', opacity: 0.6 }} />)}
       </div>
     </section>
   );
 
   return (
-    <section id="testimonials" style={{ padding: '120px 0', background: 'var(--bg-2)' }}>
+    <section id="testimonials" style={{ padding: '80px 0', background: 'var(--bg)' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
 
         {/* Header */}

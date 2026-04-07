@@ -9,10 +9,7 @@ const industries = [
   { icon: Heart,         name: 'Healthcare',   tagline: 'HealthTech & Compliance',   color: '#ef4444', href: '/industries/healthcare',   desc: 'HIPAA-compliant patient portals, telemedicine, hospital management systems.', clients: ['Hospitals','Health Insurance','Telemedicine','MedTech'] },
   { icon: Banknote,      name: 'Finance',      tagline: 'Fintech & BFSI',            color: '#22c55e', href: '/industries/finance',      desc: 'Fintech platforms, NBFC systems, insurance tech, and compliance tools. Regulatory complexity means permanent IT work.', clients: ['Fintech Startups','NBFCs','Insurance Tech','Wealth Platforms'] },
   { icon: Factory,       name: 'Manufacturing',tagline: 'ERP & Logistics',           color: '#f59e0b', href: '/industries/manufacturing', desc: 'ERP, fleet tracking, warehouse management. Operations-critical software creates zero churn.', clients: ['Manufacturers','Logistics','Supply Chain','Fleet Operators'] },
-  { icon: Building2,     name: 'Real Estate',  tagline: 'PropTech & Broker Tools',   color: '#8b5cf6', href: '/industries/real-estate',  desc: 'Property portals, CRM for brokers, virtual tours. Growing digital adoption in a traditionally offline industry.', clients: ['Developers','Broker Networks','Property Portals','REIT'] },
-  { icon: ShoppingBag,   name: 'Retail & D2C', tagline: 'E-Commerce & Brand',        color: '#06b6d4', href: '/industries/retail',       desc: 'E-commerce, inventory systems, loyalty apps, and AI-powered recommendations at scale.', clients: ['D2C Brands','Retail Chains','Marketplace Sellers','FMCG'] },
-  { icon: Landmark,      name: 'Government',   tagline: 'Smart City & Public Sector',color: '#1d4ed8', href: '/#contact',               desc: 'Smart city platforms, citizen portals, and e-governance solutions. Contracts run for years.', clients: ['State Governments','Smart City','Public Utilities','Defence'] },
-  { icon: Wifi,          name: 'IoT',          tagline: 'Industry 4.0',              color: '#0d9488', href: '/#contact',               desc: 'Smart factories, building automation, and connected retail. Hardware plus software creates deep lock-in.', clients: ['Smart Factories','Building Automation','Connected Retail','AgriTech'] },
+ 
 ];
 
 function useReveal(delay = 0) {
@@ -43,7 +40,8 @@ export default function IndustriesSection() {
             Deep expertise across<br />every vertical.
           </h2>
           <p className="text-lead" style={{ maxWidth: '480px', margin: '0 auto' }}>
-            We build genuine domain expertise — not generalist agencies that learn on your project.
+            Where we work-
+            <span className="text-accent" style={{ color: ind.color }}> {ind.name}</span> — We go deep in 5 industries — because automation only works when you understand the actual workflow.
           </p>
         </div>
 

@@ -2,12 +2,13 @@
 import AnnouncementBar from '@/components/public/AnnouncementBar.jsx';
 import Navbar from '@/components/public/Navbar';
 import HeroSection from '@/components/public/HeroSection';
-import StatsSection from '@/components/public/StatsSection';
-import ServicesSection from '@/components/public/ServicesSection';
+
+import ServicesSection from '@/components/public/ServiceSection';
 import IndustriesSection from '@/components/public/IndustriesSection';
 import TestimonialsSection from '@/components/public/TestimonialsSection';
 import CareersSection from '@/components/public/CareersSection';
 import Footer from '@/components/public/Footer';
+import CompanySection from '@/components/public/CompanySection';
 
 export default function HomePage() {
   return (
@@ -15,7 +16,7 @@ export default function HomePage() {
       <AnnouncementBar />
       <Navbar />
       <HeroSection />
-      <StatsSection />
+      <CompanySection />
       <ServicesSection />
       <IndustriesSection />
       <TestimonialsSection />

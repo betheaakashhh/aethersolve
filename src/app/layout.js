@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
           __html: `
             (function() {
               try {
-                var theme = localStorage.getItem('ast-theme') || 'light';
+                var theme = localStorage.getItem('ast-theme') || 'dark';
                 document.documentElement.setAttribute('data-theme', theme);
               } catch(e) {}
             })();

@@ -8,7 +8,7 @@ export default function PageLayout({ children, breadcrumb, title, subtitle, badg
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    const saved = localStorage.getItem('ast-theme') || 'light';
+    const saved = localStorage.getItem('ast-theme') || 'dark';
     setTheme(saved);
   }, []);
 
@@ -26,7 +26,7 @@ export default function PageLayout({ children, breadcrumb, title, subtitle, badg
       <nav style={{ position: 'sticky', top: 0, zIndex: 100, background: 'var(--navbar-bg)', backdropFilter: 'blur(24px)', borderBottom: '1px solid var(--border)' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-            <img src="/aether.png" alt="AetherSolve" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+            <img src="/newaether.png" alt="AetherSolve" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
             <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '16px', color: 'var(--text)', letterSpacing: '-0.4px' }}>AetherSolve</span>
           </Link>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

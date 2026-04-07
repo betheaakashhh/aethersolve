@@ -52,7 +52,7 @@ export default function Footer() {
       {/* Large decorative text */}
       <div
         aria-hidden
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 text-[clamp(5rem,16vw,14rem)] font-['Syne'] font-black text-white/[0.025] whitespace-nowrap select-none pointer-events-none leading-none"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 text-[clamp(5rem,16vw,14rem)] font-['Syne'] font-black text-zinc-500/[0.10] whitespace-nowrap select-none pointer-events-none leading-none"
       >
         AetherSolve
       </div>
