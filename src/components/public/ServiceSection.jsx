@@ -71,8 +71,31 @@ const services = [
     body: 'Custom ERP built to your exact workflows — HR, payroll, inventory, sales pipeline. No per-seat fees. No forced templates.',
     features: ['HR & Payroll', 'Inventory', 'CRM Pipelines', 'BI Dashboards'],
     visual: 'erp',
-  }
+  },
   
+  
+];
+
+const additionalServices = [
+  {
+    icon: Globe,
+    label: 'Web Development',
+    href: '/services/web-development',
+    title: 'Websites that work as hard as you do.',
+    body: 'Custom web applications built around your exact business logic — from marketing sites to complex enterprise portals. Fast, SEO-ready, and built to scale.',
+    features: ['React / Next.js', 'E-Commerce', 'Web Portals', 'API Development'],
+    visual: 'web',
+  },
+  {
+    icon: Smartphone,
+    label: 'Mobile Apps',
+    href: '/services/mobile-apps',
+    title: 'Apps users actually keep on their phone.',
+    body: 'iOS, Android, and cross-platform apps with a focus on retention and performance. From concept through App Store submission.',
+    features: ['React Native / Flutter', 'iOS & Android', 'Push Notifications', 'Offline Support'],
+    visual: 'mobile',
+    flip: true,
+  },
 ];
 
 // ─── Animated Visuals ───────────────────────────────────────────────────────
@@ -91,6 +114,8 @@ function Visual({ type }) {
     position: 'relative',
   };
 
+
+  
   // ── AI Automation: animated pipeline flow ──────────────────────────────
   if (type === 'ai_automation') return (
     <div style={base}>
@@ -335,7 +360,43 @@ function Visual({ type }) {
 
   return <div style={{ ...base, minHeight:'220px' }} />;
 }
-
+function ServiceBlock({ svc, i }) {
+  const Icon = svc.icon;
+  const isFlip = svc.flip;
+ 
+  return (
+    <div style={{ marginBottom: '100px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'center' }}>
+        <RevealBox delay={i * 50} style={{ order: isFlip ? 2 : 1 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '5px 12px', borderRadius: '100px', background: 'var(--accent-soft)', marginBottom: '20px' }}>
+            <Icon size={13} style={{ color: 'var(--accent)' }} />
+            <span style={{ fontSize: '11.5px', fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-body)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{svc.label}</span>
+          </div>
+          <h3 className="text-title" style={{ color: 'var(--text)', marginBottom: '16px' }}>{svc.title}</h3>
+          <p className="text-body" style={{ marginBottom: '24px' }}>{svc.body}</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '28px' }}>
+            {svc.features.map(f => (
+              <span key={f} style={{ display: 'flex', alignItems: 'center', gap: '5px', padding: '5px 12px', borderRadius: '100px', background: 'var(--bg-2)', border: '1px solid var(--border)', fontFamily: 'var(--font-body)', fontSize: '12.5px', fontWeight: 500, color: 'var(--text-2)' }}>
+                <CheckCircle size={11} style={{ color: 'var(--accent)', flexShrink: 0 }} />
+                {f}
+              </span>
+            ))}
+          </div>
+          <Link href={svc.href} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 700, color: 'var(--accent)', textDecoration: 'none', transition: 'gap 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.gap = '10px'}
+            onMouseLeave={e => e.currentTarget.style.gap = '6px'}
+          >
+            Learn more <ArrowRight size={15} />
+          </Link>
+        </RevealBox>
+        <RevealBox delay={i * 50 + 100} style={{ order: isFlip ? 1 : 2 }}>
+          <Visual type={svc.visual} />
+        </RevealBox>
+      </div>
+      <div style={{ height: '1px', background: 'var(--border)', marginTop: '0' }} />
+    </div>
+  );
+}
 export default function ServicesSection() {
   return (
     <section id="services" style={{ background:'var(--bg)', padding:'100px 0' }}>
@@ -398,6 +459,20 @@ export default function ServicesSection() {
             </div>
           );
         })}
+
+         {/* Divider */}
+        <RevealBox style={{ textAlign: 'center', margin: '60px 0 80px' }}>
+          <span className="text-label" style={{ display: 'block', marginBottom: '16px', color: 'var(--text-4)' }}>Also Available</span>
+         <hr style={{ border: 'none', borderTop: '1px solid var(--accent)', margin: '0 auto', width: '18rem' }}></hr>
+          <h3 className="text-section" style={{ color: 'var(--text)', marginBottom: '12px', fontSize:'3.25rem' }}><span style={{ color: 'var(--accent)' }}>Custom</span> Digital Products</h3>
+          <p className="text-body" style={{ maxWidth: '440px', margin: '0 auto' }}>Beyond automation — we build the interfaces and apps your team actually touches.</p>
+        </RevealBox>
+
+         {additionalServices.map((svc, i) => (
+          <ServiceBlock key={svc.label} svc={svc} i={services.length + i} />
+        ))}
+ 
+        
 
         {/* Journey strip */}
         <RevealBox>
