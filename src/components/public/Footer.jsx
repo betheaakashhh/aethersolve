@@ -119,8 +119,8 @@ export default function Footer() {
               {/* Contact details */}
               <div className="space-y-3">
                 {[
-                  { icon: Mail,   text: 'hello@aethersolve.com', href: 'mailto:hello@aethersolve.com' },
-                  { icon: Phone,  text: '+91 88000 00000',        href: 'tel:+918800000000' },
+                  { icon: Mail,   text: 'hello@aethersolve.com', href: 'mailto:contact.sincut@gmail.com' },
+                  { icon: Phone,  text: '+91 7489701783',        href: 'tel:+91 7489701783' },
                   { icon: MapPin, text: 'Bhilai, Chhattisgarh, India', href: null },
                 ].map(({ icon: Icon, text, href }) => (
                   <div key={text} className="flex items-center gap-3">

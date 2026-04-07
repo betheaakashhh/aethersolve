@@ -93,7 +93,7 @@ export default function CompanySection() {
             marginBottom: '16px'
           }}
         >
-          Why AetherSolve, not AI Model?
+          Why <span style={{ color: 'var(--accent)' }}>AetherSolve</span>, not AI Model?
         </h2>
 
         {/* Comparison Section */}
@@ -120,8 +120,8 @@ export default function CompanySection() {
               ref={chatgptRef}
               className="comparison-card"
               style={{
-                background: 'var(--surface-1)',
-                border: '1px solid var(--border)',
+                background: 'var(--surface-2)',
+                border: '2px solid var(--border)',
                 borderRadius: '16px',
                 padding: '32px 24px',
                 textAlign: 'center',
@@ -135,7 +135,8 @@ export default function CompanySection() {
               <div style={{
                 width: '60px',
                 height: '60px',
-                background: 'linear-gradient(135deg, #10a37f, #0d8a6a)',
+                background: 'var(--surface-1)',
+                border: '1.5px solid var(--border)',
                 borderRadius: '12px',
                 display: 'flex',
                 alignItems: 'center',

@@ -45,13 +45,19 @@ export default function TestimonialsSection() {
     <section style={{ padding: '80px 0', background: 'var(--bg)' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '16px' }}>
         {[0,1,2].map(i => <div key={i} style={{ height: '200px', background: 'var(--bg)', borderRadius: '20px', opacity: 0.6 }} />)}
+
       </div>
+      
+
+
     </section>
   );
 
   return (
     <section id="testimonials" style={{ padding: '80px 0', background: 'var(--bg)' }}>
+       
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
+
 
         {/* Header */}
         <div ref={headerRef} style={{ textAlign: 'center', marginBottom: '64px', opacity: headerVis ? 1 : 0, transform: headerVis ? 'translateY(0)' : 'translateY(28px)', transition: 'all 0.7s ease' }}>
@@ -63,6 +69,7 @@ export default function TestimonialsSection() {
             Real results from businesses that chose to grow with AetherSolve.
           </p>
         </div>
+        
 
         {testimonials.length === 0 ? (
           <p style={{ textAlign: 'center', color: 'var(--text-4)', fontFamily: 'var(--font-body)' }}>No testimonials yet.</p>
@@ -157,6 +164,8 @@ export default function TestimonialsSection() {
           </>
         )}
       </div>
+
+      
     </section>
   );
 }

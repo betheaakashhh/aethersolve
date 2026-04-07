@@ -204,13 +204,19 @@ const TICKER = ['Web Development','Mobile Apps','UI/UX Design','ERP Systems','AI
 export default function HeroSection() {
   return (
     <>
-      <section style={{ position:'relative', background:'var(--bg)', paddingTop:'34px', overflow:'hidden' }}>
+      <section style={{ position:'relative', background:'var(--bg)', paddingTop:'12px', overflow:'hidden' }}>
 
         {/* Particles */}
         <div style={{ position:'absolute', inset:0, zIndex:0 }}>
           <ParticleCanvas />
         </div>
 
+       <div
+        aria-hidden
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 text-[clamp(5rem,16vw,14rem)] font-['Syne'] font-black text-zinc-500/[0.10] whitespace-nowrap select-none pointer-events-none leading-none"
+      >
+        AetherSolve
+      </div>
         {/* Top orange radial */}
         <div style={{ position:'absolute', top:0, left:'50%', transform:'translateX(-50%)', width:'860px', height:'520px', background:'radial-gradient(ellipse at 50% 0%, rgba(255,92,26,0.07) 0%, transparent 62%)', pointerEvents:'none', zIndex:0 }} />
 
@@ -245,7 +251,7 @@ export default function HeroSection() {
             animation:'fadeUp .8s cubic-bezier(.16,1,.3,1) .1s both',
             
           }}>
-           We <span style={{ color: 'var(--accent)' }}>automate</span> the operations that cost you <span style={{ color: 'var(--accent)' }}>time</span> and <span style={{ color: 'var(--accent)' }}>money</span>.
+           We <span className="text-accent-1" style={{ color: 'var(--accent)', fontSize:'1.2em', textTransform:'uppercase' }}>automate</span> the operations that cost you <span className='text-accent-2' style={{ color: 'var(--accent)', fontSize:'1.2em', textTransform:'uppercase' }}>time</span> and <span className='text-accent-3' style={{ color: 'var(--accent)', fontSize:'1.2em', textTransform:'uppercase' }}>money</span>.
           </h1>
 
           {/* Body */}
