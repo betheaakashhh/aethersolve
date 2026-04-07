@@ -53,26 +53,7 @@ const services = [
     features: ['AWS / GCP', 'Auto-scaling', 'CI/CD', '24/7 uptime'],
     visual: 'ai_cloud',
   },
-  {
-    icon: Globe,
-    label: 'Web Development',
-    href: '/services/web-development',
-    title: 'Websites that work as hard as you do.',
-    body: 'Custom web applications built around your exact business logic — from marketing sites to complex enterprise portals. Fast, SEO-ready, and built to scale.',
-    features: ['React / Next.js', 'E-Commerce', 'Web Portals', 'API Development'],
-    visual: 'web',
-    flip: true,
-  },
-  {
-    icon: Smartphone,
-    label: 'Mobile Apps',
-    href: '/services/mobile-apps',
-    title: 'Apps users actually keep on their phone.',
-    body: 'iOS, Android, and cross-platform apps with a focus on retention and performance. From concept through App Store submission.',
-    features: ['React Native / Flutter', 'iOS & Android', 'Push Notifications', 'Offline Support'],
-    visual: 'mobile',
-  },
-  {
+{
     icon: Brain,
     label: 'AI Integration',
     href: '/services/ai-integration',
