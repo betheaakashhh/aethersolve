@@ -53,25 +53,8 @@ const services = [
     features: ['AWS / GCP', 'Auto-scaling', 'CI/CD', '24/7 uptime'],
     visual: 'ai_cloud',
   },
-{
-    icon: Brain,
-    label: 'AI Integration',
-    href: '/services/ai-integration',
-    title: 'Automate the work that slows you down.',
-    body: 'LLM-powered chatbots, document intelligence, workflow automation, and predictive analytics. Built for production, not demos.',
-    features: ['GPT-4o / Claude', 'Workflow Bots', 'LangChain / RAG', 'Fine-tuning'],
-    visual: 'ai',
-    flip: true,
-  },
-  {
-    icon: Database,
-    label: 'ERP & CRM',
-    href: '/services/erp-crm-classic',
-    title: 'Your operations, fully automated.',
-    body: 'Custom ERP built to your exact workflows — HR, payroll, inventory, sales pipeline. No per-seat fees. No forced templates.',
-    features: ['HR & Payroll', 'Inventory', 'CRM Pipelines', 'BI Dashboards'],
-    visual: 'erp',
-  },
+
+ 
   
   
 ];
