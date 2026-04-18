@@ -723,25 +723,7 @@ export default function ProductsPage() {
           </div>
         </section>
 
-        {/* ── STATS BAR ── */}
-        <div style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', background: 'var(--bg-2)', padding: '20px 24px' }}>
-          <div className="stats-bar" style={{ maxWidth: '1100px', margin: '0 auto' }}>
-            {[
-              { v: '4',     l: 'Live Products'    },
-              { v: '3+',    l: 'In Development'   },
-              { v: '10K+',  l: 'Users Impacted'   },
-              { v: '99.9%', l: 'Uptime SLA'       },
-            ].map((s, i) => (
-              <div key={s.l} style={{ display: 'flex', alignItems: 'center' }}>
-                {i > 0 && <div className="stat-sep" style={{ width: '1px', height: '32px', background: 'var(--border)', margin: '0 24px' }} />}
-                <div style={{ textAlign: 'center', padding: '0 16px' }}>
-                  <div style={{ fontFamily: "'Outfit',sans-serif", fontWeight: 900, fontSize: 'clamp(20px,3vw,28px)', letterSpacing: '-0.5px', color: 'var(--text)', lineHeight: 1 }}>{s.v}</div>
-                  <div style={{ fontSize: '10px', fontWeight: 600, color: 'var(--text-4)', textTransform: 'uppercase', letterSpacing: '0.08em', marginTop: '3px' }}>{s.l}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+       
 
         {/* ── TICKER ── */}
         <Ticker />
