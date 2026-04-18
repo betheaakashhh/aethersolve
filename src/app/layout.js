@@ -9,7 +9,7 @@ export const metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/aether.png', type: 'image/png', sizes: '512x512' },
+      { url: '/newaether.png', type: 'image/png', sizes: '512x512' },
     ],
     apple: '/aether.png',
   },
