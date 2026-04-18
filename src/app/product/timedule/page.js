@@ -644,11 +644,13 @@ export default function ProductsPage() {
           borderBottom: '1px solid var(--border)',
         }}>
           <div className="nav-inner" style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px', height: '58px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-              <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}>⚡</div>
-              <span style={{ fontFamily: "'Outfit',sans-serif", fontWeight: 900, fontSize: '15px', color: 'var(--text)', letterSpacing: '-0.3px' }}>AetherSolve</span>
-              <span style={{ fontSize: '9.5px', fontWeight: 700, padding: '2px 8px', borderRadius: '100px', background: 'var(--accent-soft)', color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase' }} className="nav-hide">Labs</span>
-            </Link>
+           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+            <img src="/newaether.png" alt="AetherSolve" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
+            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '17px', color: 'var(--text)', letterSpacing: '-0.5px' }}>
+              AetherSolve
+            </span>
+             <span style={{ fontSize: '9.5px', fontWeight: 700, padding: '2px 8px', borderRadius: '100px', background: 'var(--accent-soft)', color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase' }} className="nav-hide">Labs</span>
+          </Link>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Link href="/" className="nav-hide" style={{ fontSize: '12.5px', fontWeight: 600, color: 'var(--text-3)', textDecoration: 'none', padding: '6px 12px', borderRadius: '8px' }}>← Home</Link>
               <a href="https://aethersolve.vercel.app/#contact" className="btn btn-primary" style={{ padding: '9px 18px', fontSize: '12.5px' }}>
