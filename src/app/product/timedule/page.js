@@ -807,13 +807,7 @@ export default function ProductsPage() {
         <section style={{ padding: '80px 24px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '700px', height: '500px', background: 'radial-gradient(ellipse, rgba(255,92,26,0.07) 0%, transparent 65%)', pointerEvents: 'none' }} />
           <R style={{ position: 'relative', zIndex: 1, maxWidth: '580px', margin: '0 auto' }}>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-            <img src="/newaether.png" alt="AetherSolve" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
-            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '17px', color: 'var(--text)', letterSpacing: '-0.5px' }}>
-              AetherSolve
-            </span>
-             <span style={{ fontSize: '9.5px', fontWeight: 700, padding: '2px 8px', borderRadius: '100px', background: 'var(--accent-soft)', color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase' }} className="nav-hide">Labs</span>
-          </Link>
+            
             <h2 style={{
               fontFamily: "'Outfit',sans-serif", fontWeight: 900,
               fontSize: 'clamp(30px,5vw,56px)', letterSpacing: '-1.5px',
