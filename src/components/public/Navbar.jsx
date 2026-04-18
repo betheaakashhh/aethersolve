@@ -10,7 +10,7 @@ const navLinks = [
   { label: 'Work',       href: '/company/work' },
   { label: 'Blog',       href: '/company/blog' },
   { label: 'Careers',    href: '#careers' },
-  {label: 'Product',     href: '/product/rhythmiq'  }
+  {label: 'Product',     href: '/product/timedule'  }
 ];
 
 export default function Navbar() {
